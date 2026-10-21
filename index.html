@@ -7,106 +7,41 @@
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700;900&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Cairo',sans-serif}
-body{
-  min-height:100vh;
-  background:#000 url('bg.jpg') no-repeat center top;
-  background-size:cover;
-  display:flex;justify-content:center;align-items:flex-start;
-  padding-top:18px;
-}
-.wrap{
-  width:100%;max-width:380px;
-  display:flex;flex-direction:column;align-items:center;
-  padding:0 18px 20px;
-}
-.top-line{
-  width:92%;height:4px;
-  background:linear-gradient(90deg,#ff1493,#00e5ff);
-  border-radius:10px;box-shadow:0 0 12px #ff1493;
-  margin-bottom:22px;
-}
-.h1{color:#e8d5ff;font-size:36px;font-weight:900;letter-spacing:1px;
-text-shadow:0 0 12px #a855f7,0 0 25px #a855f7;display:flex;gap:10px;align-items:center}
-.h1 b{color:#fff}
-.sub{
-  margin-top:6px;
-  background:rgba(0,0,0,0.7);color:#b9a7d6;font-size:13px;
-  padding:5px 14px;border-radius:12px;border:1px solid rgba(255,255,255,0.1)
-}
-.card{
-  width:320px;height:66px;
-  background:linear-gradient(180deg,#0f0f0f 0%,#000 100%);
-  border-radius:16px;
-  border:2px solid #ff2a7a;
-  box-shadow:0 0 6px #ff2a7a,0 0 18px rgba(255,42,122,0.5),inset 0 1px 0 rgba(0,255,255,0.4),inset 0 -1px 0 rgba(255,42,122,0.6);
-  display:flex;align-items:center;justify-content:center;gap:10px;
-  position:relative;
-  margin-top:42px;
-}
-.card::before{
-  content:'';position:absolute;top:-2px;left:10%;right:10%;height:2px;
-  background:linear-gradient(90deg,transparent,#00f0ff,#ff2a7a,transparent);
-  border-radius:10px;
-}
-.card::after{
-  content:'';position:absolute;bottom:-2px;left:10%;right:10%;height:2px;
-  background:linear-gradient(90deg,transparent,#ff2a7a,#00f0ff,transparent);
-  border-radius:10px;
-}
-.card input{
-  background:transparent;border:none;outline:none;
-  color:#fff;font-size:21px;font-weight:900;text-align:center;
-  width:70%;text-shadow:0 0 10px #ff5ca8,-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;
-}
-.card input::placeholder{
-  color:#fff;text-shadow:0 0 10px #ff5ca8,0 0 20px #ff2a7a,2px 2px 0 #000;
-}
-.ico{font-size:28px;filter:drop-shadow(0 0 6px #a855f7)}
-.txt{
-  color:#fff;font-size:23px;font-weight:900;
-  text-shadow:0 0 8px #ff4da6,0 0 15px #ff2a7a,2px 0 0 #000,-2px 0 0 #000,0 2px 0 #000;
-  letter-spacing:0.5px;
-}
-.card.btn{cursor:pointer;margin-top:42px;background:linear-gradient(180deg,#1a1a1a,#000)}
-.card.btn:active{transform:scale(0.98);box-shadow:0 0 25px #ff2a7a}
-.foot{margin-top:32px;color:#c5b5dd;font-size:11px;text-shadow:0 0 5px #000}
+body{min-height:100vh;background:#0a001a url('bg.jpg') no-repeat center top;background-size:cover;display:flex;justify-content:center;padding-top:30px}
+.wrap{width:100%;max-width:380px;display:flex;flex-direction:column;align-items:center;padding:0 20px}
+.top{color:#d9c2ff;font-size:12px;background:rgba(0,0,0,0.65);padding:6px 14px;border-radius:20px;margin-bottom:35px;border:1px solid rgba(168,85,247,0.3)}
+.card{width:330px;height:68px;background:linear-gradient(180deg,#1a1a1a,#000);border-radius:16px;border:2px solid #ff2a7a;box-shadow:0 0 8px #ff2a7a,0 0 22px rgba(255,42,122,0.45),inset 0 2px 0 rgba(0,255,255,0.5);display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:32px}
+.card input{background:transparent;border:none;outline:none;color:#fff;font-size:20px;font-weight:900;text-align:center;width:72%;text-shadow:0 0 10px #ff4da6}
+.card input::placeholder{color:#fff;text-shadow:0 0 12px #ff4da6,2px 2px 0 #000}
+.txt{color:#fff;font-size:22px;font-weight:900;text-shadow:0 0 10px #ff4da6,0 0 20px #ff2a7a,2px 2px 0 #000}
+.card.btn{cursor:pointer}
+.room{color:#00ffff;font-size:11px;background:rgba(0,255,255,0.1);border:1px solid rgba(0,255,255,0.3);padding:4px 12px;border-radius:20px;margin-bottom:15px}
+.foot{margin-top:15px;color:#c9b3e0;font-size:11px}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <div class="top-line"></div>
-  <div class="h1">🔒🛡️ أهلاً بك</div>
-  <div class="sub">لوحة التحقق الآمن - سيبر سيكيورتي</div>
-
-  <div class="card" style="margin-top:55px">
-    <span class="ico">🤙</span><span class="txt">نورت ياغالي ✨</span>
-  </div>
-
-  <div class="card">
-    <span class="ico">✉️</span>
-    <input id="email" placeholder="حط الايميل">
-  </div>
-
-  <div class="card">
-    <span class="ico">⌨️</span>
-    <input id="code" type="password" placeholder="حط الكود">
-  </div>
-
-  <div class="card btn" onclick="go()">
-    <span class="ico">🛡️</span><span class="txt">اتحقق</span>
-  </div>
-
-  <div class="foot">حماية مشفرة • لا تشارك كودك مع أحد • نأسف لأجلك</div>
+  <div class="top">لوحة التحقق الآمن - سيبر سيكيورتي</div>
+  <div class="card"><span class="txt">✨ نورت ياغالي 👍</span></div>
+  <div class="card"><input id="username" placeholder="الاسم"><span style="font-size:24px">👤</span></div>
+  <div class="card"><input id="subcode" placeholder="حط كود الاشتراك"><span style="font-size:24px">🔑</span></div>
+  <div class="room">ROOM: GHOST-IBB-YE (ثابت)</div>
+  <div class="card btn" onclick="login()"><span class="txt">اتحقق 🛡️</span></div>
+  <div class="foot">حماية مشفرة • لا تشارك كودك</div>
 </div>
-
 <script>
-function go(){
-  const e=document.getElementById('email').value.trim();
-  const c=document.getElementById('code').value.trim();
-  if(!e || !c){alert('حط الايميل والكود ياغالي');return;}
-  localStorage.setItem('ghost_email',e);
-  localStorage.setItem('ghost_code',c);
-  location.href='chat.html';
+const FIXED_ROOM="GHOST-IBB-YE";
+let SUB_CODES=JSON.parse(localStorage.getItem('ghost_sub_codes_global')||'null');
+if(!SUB_CODES){SUB_CODES=["GHOST-1234","GHOST-IBB-YE","VIP-2026","ADEN-999"];}
+function login(){
+  const name=document.getElementById('username').value.trim();
+  const code=document.getElementById('subcode').value.trim().toUpperCase();
+  if(!name||!code){alert('حط الاسم والكود');return;}
+  if(SUB_CODES.includes(code)){
+    localStorage.setItem('ghost_name','『'+name+'』');
+    localStorage.setItem('ghost_room',FIXED_ROOM);
+    location.href='chat.html';
+  }else{alert('❌ كود غلط');}
 }
 </script>
 </body>
