@@ -1,42 +1,43 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GHOSTCOM - دخول</title>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GHOSTCOM</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
-body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#0a0a0f;font-family:system-ui;color:#fff}
-.card{width:92%;max-width:380px;background:#15151f;border:1px solid #8a2be2;border-radius:20px;padding:25px;box-shadow:0 0 30px rgba(138,43,226,.3)}
-h1{text-align:center;color:#a855f7;margin:0 0 5px}
-.room{text-align:center;background:#000;border-radius:10px;padding:8px;margin:15px 0;border:1px dashed #8a2be2;letter-spacing:2px}
-input{width:100%;box-sizing:border-box;padding:13px;margin:8px 0;border-radius:10px;border:1px solid #333;background:#0f0f18;color:#fff;outline:none}
-input:focus{border-color:#a855f7}
-button{width:100%;padding:13px;margin-top:12px;border:none;border-radius:10px;background:linear-gradient(90deg,#8a2be2,#a855f7);color:#fff;font-weight:bold;font-size:16px;cursor:pointer}
-#msg{text-align:center;margin-top:12px;font-size:14px}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#000 url('bg1.jpg') center/cover no-repeat fixed;font-family:'Share Tech Mono',monospace}
+body::before{content:'';position:fixed;inset:0;background:rgba(0,0,0,.45)}
+.glass{position:relative;z-index:1;width:92%;max-width:380px;padding:26px 22px;background:rgba(255,255,255,.08);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border:1px solid rgba(168,85,247,.5);border-radius:26px;box-shadow:0 0 40px rgba(139,92,246,.4)}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.logo{font-family:Orbitron;color:#fff;letter-spacing:2px}
+.logo span{color:#a855f7}
+.small{font-size:8px;letter-spacing:1.2px;color:#7ec8ff}
+label{display:block;font-size:10px;letter-spacing:1.6px;color:#8ec8ff;margin:16px 4px 6px;font-weight:700}
+.input{width:100%;padding:14px;border-radius:12px;border:1px solid rgba(168,85,247,.5);background:rgba(0,0,0,.35);color:#fff;outline:none}
+.input:focus{border-color:#22d3ee;box-shadow:0 0 18px rgba(34,211,238,.4)}
+.btn{width:100%;margin-top:20px;padding:14px;border:none;border-radius:14px;background:linear-gradient(90deg,#7c3aed,#06b6d4);color:#fff;font-family:Orbitron;font-weight:800;cursor:pointer;box-shadow:0 0 22px rgba(124,58,237,.6)}
+#msg{text-align:center;margin-top:12px;font-size:12px}
 </style>
 </head>
 <body>
-<div class="card">
-<h1>👻 GHOSTCOM</h1>
-<div class="room">GHOST-IBB-YE</div>
-<input id="name" placeholder="الاسم">
-<input id="code" placeholder="حط كود الاشتراك GHOST-XXXX">
-<button onclick="login()">دخول الغرفة</button>
+<div class="glass">
+<div class="top"><div class="logo">👻 <span>GHOST</span>COM</div><div class="small">SECURE CHANNEL • LOGIN</div></div>
+<label>YOUR NAME</label><input id="name" class="input" placeholder="Specter_09">
+<label>ROOM NUMBER</label><input class="input" value="GHOST-IBB-YE" readonly>
+<label>SERVER ADDRESS</label><input id="server" class="input" placeholder="curriculum-comply...trycloudflare.com">
+<label>SUBSCRIPTION CODE</label><input id="code" class="input" placeholder="GHOST-XXXX">
+<button class="btn" onclick="go()">ENTER GHOSTCOM</button>
 <div id="msg"></div>
 </div>
 <script>
-function login(){
-  const name = document.getElementById('name').value.trim();
-  const code = document.getElementById('code').value.trim().toUpperCase();
-  const msg = document.getElementById('msg');
-  const codes = JSON.parse(localStorage.getItem('ghost_codes') || '[]');
-  if(!name || !code){msg.style.color='#ff6b6b';msg.textContent='عبي الاسم والكود';return;}
-  if(codes.includes(code) || code.startsWith('GHOST-')){
-     msg.style.color='#22c55e';msg.textContent='تم الدخول يا '+name+' .. جاري التحويل';
-     setTimeout(()=>{msg.textContent='مرحبا بك في غرفة GHOST-IBB-YE';},1000);
-  } else {
-     msg.style.color='#ff6b6b';msg.textContent='الكود غلط او منتهي';
-  }
+function go(){
+ const n=document.getElementById('name').value.trim(), s=document.getElementById('server').value.trim(), c=document.getElementById('code').value.trim().toUpperCase();
+ const codes=JSON.parse(localStorage.getItem('ghost_codes')||'[]'); const m=document.getElementById('msg');
+ if(!n||!s||!c){m.style.color='#ff8a8a';m.textContent='عبي كل الحقول';return}
+ if(!codes.includes(c) && !c.startsWith('GHOST-')){m.style.color='#ff8a8a';m.textContent='كود الاشتراك غلط';return}
+ localStorage.setItem('ghost_session',JSON.stringify({name:n,server:s}));
+ m.style.color='#7effb2';m.textContent='تم - جاري الدخول...'; setTimeout(()=>location.href='home.html',700);
 }
 </script>
 </body>
