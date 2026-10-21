@@ -1,48 +1,80 @@
-<!DOCTYPE html><html dir="rtl" lang="ar"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>حماية السيبراني</title>
-<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=Orbitron:wght@700&family=Cairo:wght@600;800&display=swap" rel="stylesheet">
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GHOSTCOM</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0}body{min-height:100vh;background:#000 url('bg1.jpg') center/cover no-repeat;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:20px 14px;font-family:'Cairo',sans-serif}
-h1{font-family:'Amiri';font-size:38px;background:linear-gradient(90deg,#ff00ff,#00ffff,#ffea00);-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 12px #a855f7);text-align:center;margin-top:18px;letter-spacing:1px}
-.card{width:100%;max-width:360px;background:rgba(15,18,35,.88);backdrop-filter:blur(20px);border:1px solid rgba(168,85,247,.5);border-radius:22px;padding:20px;box-shadow:0 0 30px rgba(124,58,237,.4)}
-.lab{color:#c084fc;font-size:13px;margin-bottom:8px;text-align:center}
-.inp{width:100%;padding:15px;border-radius:14px;background:rgba(0,0,0,.6);border:1px solid #a855f7;color:#fff;font-size:15px;text-align:center;outline:none}
-.btns{display:flex;gap:10px;margin-top:16px}
-.btn{flex:1;padding:13px;border:none;border-radius:12px;font-weight:800;cursor:pointer;font-family:'Cairo'}
-.b1{background:rgba(255,255,255,.08);color:#fff;border:1px solid #a855f7}
-.b2{background:linear-gradient(90deg,#7c3aed,#06b6d4);color:#fff;box-shadow:0 6px 20px rgba(124,58,237,.5)}
-.footer{width:100%;max-width:360px;text-align:center;padding:12px;background:rgba(0,0,0,.6);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.15);border-radius:14px;font-size:13px;color:#94e2ff}
-</style></head><body>
-<h1>حُـمـايـة الـسـيـبـرانـي</h1>
+*{box-sizing:border-box;font-family:Tahoma,system-ui}
+body{margin:0;min-height:100vh;background:#000 url('https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1000') center/cover no-repeat;display:flex;align-items:center;justify-content:center;padding:12px}
+body::before{content:'';position:fixed;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.2),rgba(0,0,0,.8))}
+.wrap{position:relative;z-index:1;width:100%;max-width:390px}
+.title{font-size:28px;font-weight:900;text-align:center;margin:0 0 12px;background:linear-gradient(90deg,#ff00ff,#ffff00);-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 10px #a855f7)}
+.card{background:rgba(255,255,255,0.08);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(168,85,247,.5);border-radius:28px;padding:18px;box-shadow:0 0 40px rgba(124,58,237,.4),inset 0 0 20px rgba(255,255,255,.05)}
+.top{display:flex;align-items:center;gap:8px;margin-bottom:14px;opacity:.9;font-size:12px;letter-spacing:1px}
+.top b{color:#a78bfa}
+.label{font-size:11px;opacity:.7;margin:8px 4px 4px;text-align:right}
+input{width:100%;padding:13px 12px;border-radius:14px;border:1px solid rgba(255,255,255,.15);background:rgba(15,23,42,.8);color:#fff;text-align:center;font-size:15px;outline:none}
+input::placeholder{color:#94a3b8}
+.row{display:flex;gap:10px;margin-top:12px}
+.btn{flex:1;padding:12px;border-radius:14px;border:none;font-weight:800;cursor:pointer}
+.btn-blue{background:linear-gradient(90deg,#7c3aed,#06b6d4);color:#fff}
+.btn-dark{background:rgba(30,41,59,.9);color:#fff;border:1px solid rgba(255,255,255,.15)}
+.big{width:100%;margin-top:16px;padding:16px;border-radius:18px;background:linear-gradient(90deg,#8b5cf6,#06b6d4);border:1px solid rgba(255,255,255,.3);color:#fff;font-weight:900;font-size:18px;letter-spacing:1px;cursor:pointer;box-shadow:0 0 20px rgba(139,92,246,.6)}
+.msg{text-align:center;margin-top:10px;font-size:13px;min-height:18px}
+.ok{color:#4ade80}.err{color:#fb7185}
+.footer{margin-top:18px;text-align:center;background:rgba(0,0,0,.6);padding:10px;border-radius:14px;font-size:12px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1 class="title">حماية سيبراني</h1>
 <div class="card">
-<div class="lab">حط الكود الدخول</div>
-<input id="code" class="inp" placeholder="GHOST-XXXX">
-<div class="btns">
-<button class="btn b1" onclick="checkCode()">ارجاء التحقق</button>
-<button class="btn b2" onclick="enter()">دخول ✓</button>
+<div class="top">👻 <b>GHOSTCOM</b> <span style="margin-right:auto">SECURE CHANNEL • LOGIN</span></div>
+
+<div class="label">YOUR NAME</div>
+<input id="nameInput" value="Specter_00" placeholder="اسمك">
+
+<div style="margin-top:12px;background:rgba(0,0,0,.4);padding:12px;border-radius:16px;border:1px solid rgba(255,255,255,.08)">
+<div class="label" style="text-align:center;margin:0 0 8px">حط الكود الدخول</div>
+<input id="codeInput" placeholder="GHOST-XXXX">
+<div class="row">
+<button class="btn btn-blue" onclick="verify()">✓ دخول</button>
+<button class="btn btn-dark" onclick="clearForm()">ارجاء التحقق</button>
 </div>
-<div id="msg" style="text-align:center;margin-top:10px;font-size:12px;color:#86efac"></div>
+<div id="status" class="msg"></div>
 </div>
-<div class="footer">📞 اتواصل مع المطور<br>+967717337861</div>
+
+<button class="big" onclick="enterApp()">ENTER GHOSTCOM</button>
+</div>
+<div class="footer">📞 تواصل مع المطور<br>+967717337861</div>
+</div>
+
 <script>
 let verified=false;
-function checkCode(){
- let c=document.getElementById('code').value.trim().toUpperCase();
- if(!c){alert('حط الكود');return;}
- let codes=JSON.parse(localStorage.getItem('ghost_codes')||'[]');
- let found=codes.find(x=>x.code===c);
- if(!found || found.used){document.getElementById('msg').innerHTML='⛔ الكود مستخدم أو غير صالح';verified=false;return;}
- document.getElementById('msg').innerHTML='✅ الكود صحيح، تقدر تدخل';verified=true;
+function verify(){
+ let code=document.getElementById('codeInput').value.trim().toUpperCase();
+ let name=document.getElementById('nameInput').value.trim()||'Specter';
+ let s=document.getElementById('status');
+ if(code.length<6 || !code.includes('GHOST')){s.innerHTML='<span class=err>⛔ اكتب كود يبدأ بـ GHOST-</span>';verified=false;return;}
+ let used=JSON.parse(localStorage.getItem('ghost_used_codes')||'[]');
+ if(used.includes(code)){s.innerHTML='<span class=err>⛔ الكود مستخدم من قبل</span>';verified=false;return;}
+ localStorage.setItem('ghost_session',JSON.stringify({name:name,code:code}));
+ localStorage.setItem('ghost_temp_verified',code);
+ s.innerHTML='<span class=ok>✅ تمام يا '+name+' اضغط ENTER GHOSTCOM</span>';
+ verified=true;
 }
-function enter(){
- if(!verified){alert('اضغط ارجاء التحقق أولا');return;}
- let c=document.getElementById('code').value.trim().toUpperCase();
- let codes=JSON.parse(localStorage.getItem('ghost_codes')||'[]');
- let idx=codes.findIndex(x=>x.code===c);
- codes[idx].used=true; codes[idx].usedAt=Date.now();
- localStorage.setItem('ghost_codes',JSON.stringify(codes));
- localStorage.setItem('ghost_session',JSON.stringify({code:c,name:'عضو',time:Date.now()}));
+function enterApp(){
+ if(!verified) verify();
+ if(!verified) return;
+ let code=localStorage.getItem('ghost_temp_verified');
+ let used=JSON.parse(localStorage.getItem('ghost_used_codes')||'[]');
+ if(!used.includes(code)){used.push(code);localStorage.setItem('ghost_used_codes',JSON.stringify(used));}
  location.href='home.html';
 }
-(function(){if(!localStorage.getItem('ghost_codes')){localStorage.setItem('ghost_codes',JSON.stringify([{code:'GHOST-IBB-YE',used:false},{code:'GHOST-MASTER',used:false}]));}})();
-</script></body></html>
+function clearForm(){document.getElementById('codeInput').value='';document.getElementById('status').innerHTML='';verified=false;}
+// رابط لتصفير الاكواد لو علق: ?reset=1
+if(location.search.includes('reset=1')){localStorage.removeItem('ghost_used_codes');alert('تم تصفير الأكواد');}
+</script>
+</body>
+</html>
