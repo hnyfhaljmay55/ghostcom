@@ -2,125 +2,78 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>GHOSTCOM</title>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Cairo:wght@400;600&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHOSTCOM - عربي</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Cairo',sans-serif;background:#02020a;color:#fff;min-height:100vh;overflow:hidden}
-.bg{position:fixed;inset:0;z-index:-3;background:url('https://images.unsplash.com/photo-1519608487953-e999c86e7455?q=80&w=2000') center/cover;filter:brightness(0.45)}
-.bg::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 20%, rgba(80,0,255,0.25) 0%, rgba(2,2,10,0.85) 70%)}
-.screen{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:18px;transition:0.5s}
-#loginScreen{opacity:1}#loginScreen.hidden{opacity:0;pointer-events:none;transform:scale(0.96)}
-#chatScreen{opacity:0;pointer-events:none;flex-direction:column;padding:0}#chatScreen.active{opacity:1;pointer-events:all}
-#adminScreen{opacity:0;pointer-events:none;flex-direction:column;padding:0}#adminScreen.active{opacity:1;pointer-events:all}
-.card{width:100%;max-width:360px;background:linear-gradient(180deg, rgba(20,20,40,0.6) 0%, rgba(10,10,25,0.75) 100%);border-radius:32px;padding:28px 22px 26px;backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.15);box-shadow:0 0 0 1px rgba(0,255,255,0.2), 0 0 30px rgba(0,255,255,0.2);overflow:hidden;position:relative}
-.card::before{content:'';position:absolute;top:0;left:10%;right:10%;height:1px;background:linear-gradient(90deg, transparent, #00ffff 50%, transparent)}
-.logo-row{display:flex;align-items:center;gap:10px;margin-bottom:28px}
-.ghost{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,#00ffff,#8a2be2);display:flex;align-items:center;justify-content:center;font-size:22px}
-.logo{font-family:'Orbitron';font-weight:700;font-size:18px;background:linear-gradient(90deg,#fff,#00e5ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.sub{font-family:'Orbitron';font-size:8px;color:#00e5ff;margin-left:auto;letter-spacing:2px}
-.label{font-family:'Orbitron';font-size:10px;color:#00e5ff;margin-bottom:8px;display:block;letter-spacing:1.5px}
-.input{width:100%;background:rgba(0,0,0,0.45);border:1.5px solid rgba(138,43,226,0.4);border-radius:14px;padding:14px 16px;color:#fff;font-family:'Orbitron';font-size:13px;outline:none;transition:0.3s}
-.input:focus{border-color:#00ffff;box-shadow:0 0 20px rgba(0,255,255,0.3)}
-.btn{width:100%;margin-top:24px;background:linear-gradient(90deg,#7c3aed,#00d9ff);border:none;border-radius:14px;padding:15px;font-family:'Orbitron';font-weight:700;font-size:15px;color:#fff;cursor:pointer;box-shadow:0 0 20px rgba(124,58,237,0.5)}
-.error{min-height:20px;text-align:center;font-size:12px;color:#ff4d9a;margin-top:14px}
-.hint{margin-top:14px;padding:10px;background:rgba(0,255,255,0.05);border:1px dashed rgba(0,255,255,0.2);border-radius:10px;text-align:center;font-size:10px;color:#888;line-height:1.6}
-.hint b{color:#00e5ff;font-family:'Orbitron'}
-.chat-wrap{width:100%;height:100dvh;display:flex;flex-direction:column;background:#040410}
-.chat-header{margin:10px;border:1.5px solid rgba(0,255,255,0.5);border-radius:18px;padding:10px 14px;background:linear-gradient(90deg, rgba(15,15,35,0.9), rgba(10,10,30,0.9));display:flex;justify-content:space-between;align-items:center}
-.h-left{display:flex;align-items:center;gap:12px}
-.avatar{width:42px;height:42px;border-radius:50%;border:2px solid #00ffff;background:url('https://i.pravatar.cc/100?img=68') center/cover;position:relative}
-.dot{position:absolute;bottom:-1px;right:-1px;width:12px;height:12px;background:#00ff88;border:2px solid #0f0f23;border-radius:50%}
-.h-btn{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.06);border:1px solid rgba(0,255,255,0.2);color:#00ffff;display:flex;align-items:center;justify-content:center;cursor:pointer}
-.messages{flex:1;overflow-y:auto;padding:14px 12px;display:flex;flex-direction:column;gap:14px}
-.msg{max-width:82%;padding:12px 14px;border-radius:18px;font-size:14px;line-height:1.6}
-.msg.other{align-self:flex-start;background:linear-gradient(135deg, rgba(10,20,45,0.9), rgba(15,25,50,0.85));border:1.5px solid rgba(0,255,255,0.6);border-bottom-left-radius:6px}
-.msg.me{align-self:flex-end;background:linear-gradient(135deg, rgba(45,15,45,0.9), rgba(50,20,50,0.85));border:1.5px solid rgba(255,0,170,0.6);border-bottom-right-radius:6px}
-.time{font-size:10px;color:rgba(255,255,255,0.5);margin-top:8px;text-align:right;font-family:'Orbitron'}
-.inputbar{margin:10px;background:linear-gradient(90deg, rgba(15,15,35,0.95), rgba(10,10,30,0.95));border:1.5px solid rgba(0,255,255,0.4);border-radius:28px;padding:8px 10px;display:flex;gap:8px}
-.inputbar input{flex:1;background:transparent;border:none;outline:none;color:#fff;font-size:14px}
-.ibtn{width:42px;height:42px;border-radius:50%;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer}
-.ibtn.send{background:linear-gradient(135deg,#8a2be2,#ff00aa);color:#fff}
-.admin-card{width:100%;max-width:420px;background:linear-gradient(180deg, rgba(20,20,40,0.85), rgba(10,10,25,0.95));border:1.5px solid rgba(0,255,255,0.3);border-radius:24px;padding:24px 18px;backdrop-filter:blur(20px)}
-.alist{max-height:50vh;overflow-y:auto;margin-top:14px;display:flex;flex-direction:column;gap:8px}
-.acode{display:flex;justify-content:space-between;align-items:center;background:rgba(0,0,0,0.4);border:1px solid rgba(0,255,255,0.2);border-radius:12px;padding:10px 12px}
-.acode.used{opacity:0.45}
-.acode b{font-family:'Orbitron';font-size:12px;color:#00e5ff}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Cairo',sans-serif}
+body{background:#060610;color:#fff;min-height:100vh;display:flex;justify-content:center;align-items:center}
+.neon{background:rgba(15,10,40,0.9);border:1.5px solid #2a2a5a;border-radius:28px;padding:28px 22px;width:93%;max-width:400px;box-shadow:0 0 40px rgba(123,62,255,0.3)}
+.logo{display:flex;justify-content:center;align-items:center;gap:10px;margin-bottom:20px}
+.logo b{font-size:22px;text-shadow:0 0 10px #00d9ff}
+.lab{font-size:11px;color:#00d9ff;margin:16px 0 6px;text-align:right}
+.inp{width:100%;background:#0a0a1a;border:1.5px solid #3a3a6a;border-radius:14px;padding:14px;color:#fff;text-align:center;outline:none}
+.btn{width:100%;background:linear-gradient(90deg,#7b3eff,#00d4ff);border:none;border-radius:30px;padding:14px;font-weight:800;color:#fff;margin-top:18px;cursor:pointer}
+.info{margin-top:14px;background:#0006;border-radius:12px;padding:10px;font-size:11px;text-align:center;color:#8a8ab0}
+.dev{display:none}
+.card{background:#0008;border:1px solid #3a2a6a;border-radius:12px;padding:12px;margin:8px 0;display:flex;justify-content:space-between}
+.card span{font-family:monospace;color:#00ff88;font-weight:700}
+.badge{background:#00ff88;color:#000;font-size:10px;padding:3px 8px;border-radius:20px}
+.badge.burn{background:#ff3a5a;color:#fff}
+.btn-p{background:linear-gradient(90deg,#7b3eff,#b03eff);margin:8px 0}
+.btn-g{background:linear-gradient(90deg,#00c87a,#00e0a0);color:#000;margin:8px 0}
+.chat{display:none;position:fixed;inset:0;background:#080818;flex-direction:column}
+.head{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:center;padding:12px;margin:10px;border:1.5px solid #00e5ff44;border-radius:18px;background:rgba(10,15,35,0.9)}
+.msgs{position:relative;z-index:2;flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:12px}
+.m{max-width:80%;padding:11px 13px;border-radius:16px;font-size:13.5px}
+.in{align-self:flex-start;background:rgba(20,40,60,0.85);border:1px solid #00d9ff44;color:#cfe8ff}
+.out{align-self:flex-end;background:rgba(60,20,80,0.75);border:1px solid #ff00aa44;color:#ffe0f0}
+.input-bar{position:relative;z-index:2;display:flex;gap:8px;padding:10px;margin:10px;border:1.5px solid #00e5ff44;border-radius:30px;background:rgba(10,10,30,0.9)}
+.input-bar input{flex:1;background:transparent;border:none;outline:none;color:#fff}
 </style>
 </head>
 <body>
-<div class="bg"></div>
-<div class="screen" id="loginScreen">
-<div class="card">
-<div class="logo-row"><div class="ghost">👻</div><div class="logo">GHOSTCOM</div><div class="sub">SECURE CHANNEL • LOGIN</div></div>
-<div><label class="label">YOUR NAME</label><input id="nameInput" class="input" placeholder="Specter_09"></div>
-<div style="margin-top:18px"><label class="label">INVITE CODE • كود مخلط انجليزي</label><input id="codeInput" class="input" placeholder="GHOST-X7K9-P2M4" style="text-transform:uppercase"></div>
-<div style="margin-top:18px"><label class="label">ROOM NUMBER</label><input id="roomInput" class="input" value="GHOST-IBB-YE" readonly style="opacity:0.6"></div>
-<button class="btn" id="enterBtn">ENTER GHOSTCOM</button>
-<div class="error" id="errorBox"></div>
-<div class="hint">كود المالك: <b>DEV-X9K2-ADMIN</b><br>كود تجريبي: <b>GHOST-DEMO-2026</b><br>كل كود <b>حروف+أرقام</b> وينحرق بعد مرة</div>
+<div id="login" class="neon">
+<div class="logo"><span style="font-size:11px;color:#7ab8ff">قناة آمنة - تسجيل دخول</span><b>GHOSTCOM</b><span>👻</span></div>
+<div class="lab">اسمك - YOUR NAME</div><input id="uname" class="inp" placeholder="اكتب اسمك">
+<div class="lab">كود الدعوة المختلط - INVITE CODE</div><input id="icode" class="inp" placeholder="GHOST-XXXX-XXXX">
+<div class="lab">رقم الغرفة - ROOM NUMBER</div><input class="inp" value="GHOST-IBB-YE" readonly>
+<button class="btn" onclick="enterG()">دخول GHOSTCOM - ENTER</button>
+<div class="info">كود المالك: <b style="color:#00d9ff">DEV-X9K2-ADMIN</b><br>كل كود مخلط يستخدم مرة واحدة وينحرق 🔥</div>
 </div>
+
+<div id="dev" class="neon dev">
+<div class="logo"><b>GHOSTCOM 👑 لوحة المالك</b></div>
+<button class="btn btn-p" onclick="gen()">+ توليد كود مخلط جديد</button>
+<button class="btn btn-g" onclick="share()">📤 مشاركة آخر كود</button>
+<div id="list"></div>
+<button class="btn" style="background:#222" onclick="back()">رجوع ←</button>
 </div>
-<div class="screen" id="adminScreen">
-<div class="admin-card">
-<div style="text-align:center"><div style="font-family:'Orbitron';font-size:18px;color:#00e5ff">DEV PANEL 👑</div><div style="font-size:10px;color:#888;letter-spacing:2px;margin-top:4px">GENERATOR MIXED CODE</div><div id="lastBox" style="margin-top:10px;padding:8px;background:rgba(0,255,136,0.1);border:1px solid rgba(0,255,136,0.2);border-radius:10px;font-size:11px;color:#00ff88">اضغط توليد كود جديد</div></div>
-<button class="btn" id="genBtn">+ توليد كود مخلط جديد</button>
-<button class="btn" id="shareBtn" style="background:linear-gradient(90deg,#00ff88,#00e5ff);color:#000;margin-top:10px">مشاركة الكود 📤</button>
-<div class="alist" id="adminList"></div>
-<button class="btn" id="adminBack" style="background:transparent;border:1px solid #333;margin-top:14px">رجوع</button>
+
+<div id="chat" class="chat">
+<div class="head"><div style="display:flex;gap:10px;align-items:center"><span onclick="back()">←</span><div>🥷</div><div><div style="font-weight:700">وحدة ألفا | الدعم التقني</div><div style="font-size:11px;color:#00ff88">متصل الآن</div></div></div></div>
+<div class="msgs" id="msgs">
+<div class="m in">مرحبا، هل جهزت ملفات المشروع؟</div>
+<div class="m out">أكيد، رفعت الصور والفيديو الآن</div>
 </div>
+<div class="input-bar"><input id="minp" placeholder="اكتب رسالة..."><button style="width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#ff00aa,#7b3eff);border:none;color:#fff" onclick="sendM()">◁</button></div>
 </div>
-<div class="screen" id="chatScreen">
-<div class="chat-wrap">
-<div class="chat-header"><div class="h-left"><div class="avatar"><div class="dot"></div></div><div><h3 style="font-size:14px">وحدة ألفا | الدعم التقني</h3><p id="statusText" style="font-size:11px;color:#00ff88">متصل الآن</p></div></div><div style="display:flex;gap:10px"><button class="h-btn">📞</button><button class="h-btn" id="chatBack">←</button></div></div>
-<div class="messages" id="chatMessages"></div>
-<div class="inputbar"><input id="msgInput" placeholder="اكتب رسالة..."><button class="ibtn send" id="sendBtn">➤</button><input type="file" id="fileInput" accept="image/*,video/*" hidden></div>
-</div>
-</div>
+
 <script>
-const OWNER="DEV-X9K2-ADMIN", DEMO="GHOST-DEMO-2026";
-const gun=Gun(['https://gun-manhattan.herokuapp.com/gun']);
-const invites=gun.get('ghostcom-final-v6-invites'), chat=gun.get('ghostcom-final-v6-chat');
-let myName="",myCode="",lastCode="";
-function genCode(){const C="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";const p=()=>Array.from({length:4},()=>C[Math.floor(Math.random()*C.length)]).join('');return `GHOST-${p()}-${p()}`;}
-function timeNow(){return new Date().toLocaleTimeString('ar-EG',{hour:'2-digit',minute:'2-digit',hour12:false});}
-function err(t){document.getElementById('errorBox').textContent=t;}
-invites.get(DEMO).once(d=>{if(!d) invites.get(DEMO).put({used:false,createdAt:Date.now()});});
-function render(code,data){const id='ac_'+code.replace(/[^A-Z0-9]/g,'_');let el=document.getElementById(id);if(!el){el=document.createElement('div');el.id=id;document.getElementById('adminList').prepend(el);}const used=data&&data.used;el.className='acode'+(used?' used':'');el.innerHTML=`<b>${code}</b><span style="font-size:10px;padding:3px 8px;border-radius:20px;background:${used?'#ff3b9a':'#00ff88'};color:${used?'#fff':'#000'}">${used?'مستهلك: '+(data.usedBy||''):'متاح'}</span>`;}
-invites.map().on((d,c)=>{if(!c||c=='_')return;render(c,d);});
-document.getElementById('genBtn').onclick=()=>{const code=genCode();lastCode=code;invites.get(code).put({used:false,createdAt:Date.now()});document.getElementById('lastBox').innerHTML=`✅ كود جديد: <b style="font-family:Orbitron">${code}</b>`;};
-document.getElementById('shareBtn').onclick=()=>{if(!lastCode){alert('ولد كود أولا');return;}const t=`🔐 كود GHOSTCOM:\n${lastCode}\nhttps://hnyfhaljmay55.github.io/ghostcom/\nمرة واحدة فقط!`;if(navigator.share){navigator.share({text:t});}else{prompt('انسخ:',t);}};
-document.getElementById('enterBtn').onclick=()=>{
-  const name=document.getElementById('nameInput').value.trim()||'Specter_09';
-  const code=document.getElementById('codeInput').value.trim().toUpperCase();
-  if(!code){err('أدخل كود الدعوة');return;}
-  if(code===OWNER){myName=name;document.getElementById('loginScreen').classList.add('hidden');setTimeout(()=>document.getElementById('adminScreen').classList.add('active'),300);return;}
-  invites.get(code).once(data=>{
-    if(!data){err('❌ الكود غير موجود');return;}
-    if(data.used){err(`❌ الكود انحرق! استخدمه ${data.usedBy||''}`);return;}
-    invites.get(code).put({used:true,usedBy:name,usedAt:Date.now(),createdAt:data.createdAt});
-    myName=name;myCode=code;
-    document.getElementById('loginScreen').classList.add('hidden');
-    setTimeout(()=>document.getElementById('chatScreen').classList.add('active'),350);
-    document.getElementById('statusText').textContent=`متصل • ${code} ✓`;
-  });
-};
-function send(){const txt=document.getElementById('msgInput').value.trim();if(!txt)return;const id=Date.now()+'_'+Math.random().toString(36).slice(2);chat.get(id).put({content:txt,sender:myName,time:timeNow(),id});document.getElementById('msgInput').value='';}
-document.getElementById('sendBtn').onclick=send;
-document.getElementById('msgInput').addEventListener('keydown',e=>{if(e.key==='Enter')send();});
-chat.map().on((data,id)=>{
-  if(!data||!data.content)return;
-  if(document.getElementById('m_'+id))return;
-  const isMe=data.sender===myName;
-  const div=document.createElement('div');div.id='m_'+id;div.className='msg '+(isMe?'me':'other');
-  div.innerHTML=`<div>${data.content}</div><div class="time">${data.time||timeNow()} ${isMe?'✓✓':''}</div>`;
-  document.getElementById('chatMessages').appendChild(div);
-  document.getElementById('chatMessages').scrollTop=document.getElementById('chatMessages').scrollHeight;
-});
-document.getElementById('chatBack').onclick=()=>{document.getElementById('chatScreen').classList.remove('active');document.getElementById('loginScreen').classList.remove('hidden');};
-document.getElementById('adminBack').onclick=()=>{document.getElementById('adminScreen').classList.remove('active');document.getElementById('loginScreen').classList.remove('hidden');};
+let codes=JSON.parse(localStorage.getItem('ghost_codes')||'[]');let last=localStorage.getItem('ghost_last')||'GHOST-DEMO-2026';
+if(codes.length==0){codes=[{code:'GHOST-DEMO-2026',s:'متاح'},{code:'GHOST-334Y-8PAU',s:'متاح'}]}
+function enterG(){
+let n=document.getElementById('uname').value.trim();let c=document.getElementById('icode').value.trim().toUpperCase();
+if(c==='DEV-X9K2-ADMIN'){document.getElementById('login').style.display='none';document.getElementById('dev').style.display='block';render();return}
+let f=codes.find(x=>x.code===c);if(!f){alert('الكود غير صحيح');return}if(f.s!=='متاح'){alert('الكود محروق 🔥');return}
+f.s='محروق 🔥';localStorage.setItem('ghost_codes',JSON.stringify(codes));document.getElementById('login').style.display='none';document.getElementById('chat').style.display='flex';
+}
+function gen(){let ch='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';let a='',b='';for(let i=0;i<4;i++)a+=ch[Math.floor(Math.random()*ch.length)];for(let i=0;i<4;i++)b+=ch[Math.floor(Math.random()*ch.length)];let nc='GHOST-'+a+'-'+b;codes.unshift({code:nc,s:'متاح'});last=nc;localStorage.setItem('ghost_codes',JSON.stringify(codes));localStorage.setItem('ghost_last',nc);render()}
+function render(){let h='';codes.forEach(x=>{h+=`<div class=card><span>${x.code}</span><span class="badge ${x.s==='متاح'?'':'burn'}">${x.s}</span></div>`});document.getElementById('list').innerHTML=h}
+function share(){navigator.clipboard.writeText(last);alert('تم نسخ: '+last)}
+function back(){document.getElementById('dev').style.display='none';document.getElementById('chat').style.display='none';document.getElementById('login').style.display='block'}
+function sendM(){let i=document.getElementById('minp');if(!i.value.trim())return;let d=document.createElement('div');d.className='m out';d.innerText=i.value;document.getElementById('msgs').appendChild(d);i.value=''}
+render();
 </script>
 </body>
- </html>
+</html>
