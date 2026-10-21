@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GhostCom - مملكة التعارف</title>
+<script src="/socket.io/socket.io.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Tahoma}
+body{background:#111;color:#fff;height:100vh;overflow:hidden}
+#login{position:fixed;inset:0;background:linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.8)),url('https://images.unsplash.com/photo-1519608487953-e999c86e7455');background-size:cover;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:20px}
+#login .box{background:rgba(20,20,20,.9);padding:25px;border-radius:15px;width:100%;max-width:350px;text-align:center;border:1px solid #333}
+#login input{width:100%;padding:12px;margin:8px 0;border-radius:10px;border:none;outline:none}
+#login button{width:100%;padding:12px;background:#00ff88;border:none;border-radius:10px;color:#000;font-weight:bold;font-size:16px;margin-top:10px}
+#main{display:none;height:100vh;flex-direction:column;background:#0a0a0a}
+.top-search{padding:10px;background:#202020;display:flex;gap:10px;align-items:center}
+.top-search input{flex:1;padding:10px;border-radius:20px;border:none;background:#2a2a2a;color:#fff;outline:none}
+.chat-list{flex:1;overflow-y:auto}
+.item{display:flex;gap:12px;padding:12px 15px;border-bottom:1px solid #222;align-items:center}
+.item img{width:55px;height:55px;border-radius:50%;object-fit:cover}
+.item .info{flex:1}
+.item .name{font-weight:bold}
+.item .last{font-size:12px;color:#aaa;margin-top:3px}
+.fixed{ background:#1a1a2e; border-left:4px solid #00ff88;}
+.bottom{padding:10px;background:#202020;display:flex;justify-content:space-between;align-items:center}
+.bottom .btn{width:50px;height:50px;border-radius:50%;border:none;display:flex;justify-content:center;align-items:center;font-size:24px}
+.btn-ai{background:#222;border:2px solid #00ff88 !important}
+.btn-plus{background:#00ff88}
+#chat-screen{display:none;position:fixed;inset:0;background:#0e0e0e;flex-direction:column}
+#chat-header{padding:12px;background:#202020;display:flex;align-items:center;gap:10px}
+#messages{flex:1;overflow-y:auto;padding:15px;display:flex;flex-direction:column;gap:8px;background-image:url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png')}
+.msg{max-width:75%;padding:8px 12px;border-radius:12px;font-size:14px}
+.me{align-self:flex-end;background:#005c4b}
+.other{align-self:flex-start;background:#202c33}
+#input-bar{padding:10px;background:#202020;display:flex;gap:8px}
+#input-bar input{flex:1;padding:10px;border-radius:20px;border:none;background:#2a2a2a;color:#fff}
+#input-bar button{padding:10px 15px;border-radius:20px;border:none;background:#00ff88;color:#000}
+</style>
+</head>
+<body>
+<div id="login">
+  <div class="box">
+    <h2>👻 GhostCom</h2>
+    <p style="color:#aaa;margin:10px 0">مملكة التعارف - التواصل العالمي</p>
+    <input id="username" placeholder="اسم المستخدم">
+    <input id="code" placeholder="كود الاشتراك 8 حروف">
+    <input id="room" placeholder="رقم الغرفة (اختياري)">
+    <button onclick="doLogin()">دخول</button>
+    <p id="err" style="color:#ff4444;margin-top:10px"></p>
+  </div>
+</div>
+<div id="main">
+  <div class="top-search">
+    <input placeholder="بحث...">
+  </div>
+  <div class="chat-list" id="chat-list">
+    <div class="item fixed" onclick="openGroup()">
+      <img src="https://via.placeholder.com/55/00ff88/000?text=أ" >
+      <div class="info"><div class="name">GhostCom / أهلاً بگ</div><div class="last">الجروب الرسمي - اضغط للدخول</div></div>
+    </div>
+    <div id="private-list"></div>
+  </div>
+  <div class="bottom">
+    <div style="display:flex;gap:10px">
+      <button class="btn btn-ai" onclick="openAI()">🤖</button>
+      <button class="btn btn-plus" onclick="startPrivate()">+</button>
+    </div>
+    <div style="color:#aaa;font-size:12px">خاص</div>
+  </div>
+</div>
+<div id="chat-screen">
+  <div id="chat-header">
+    <button onclick="closeChat()" style="background:none;border:none;color:#fff;font-size:20px">←</button>
+    <img id="chatAvatar" src="" style="width:40px;height:40px;border-radius:50%">
+    <div><div id="chatName" style="font-weight:bold"></div><div style="font-size:11px;color:#00ff88">متصل الآن</div></div>
+  </div>
+  <div id="messages"></div>
+  <div id="input-bar">
+    <input id="msgInput" placeholder="اكتب رسالة...">
+    <button onclick="sendMsg()">إرسال</button>
+  </div>
+</div>
+<script>
+let deviceId = localStorage.getItem('deviceId');
+if(!deviceId){ deviceId = Math.random().toString(36).substring(2,12); localStorage.setItem('deviceId', deviceId); }
+let socket, currentChat=null, chatType=null, myName=null;
+if(localStorage.getItem('logged')==='yes'){
+  myName = localStorage.getItem('username');
+  document.getElementById('login').style.display='none';
+  document.getElementById('main').style.display='flex';
+  connectSocket();
+}
+async function doLogin(){
+  const username=document.getElementById('username').value.trim();
+  const code=document.getElementById('code').value.trim().toUpperCase();
+  if(!username || !code){ document.getElementById('err').innerText='اكتب الاسم والكود'; return; }
+  const res = await fetch('/check-code',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({code,deviceId,username})});
+  const data=await res.json();
+  if(!data.ok){ document.getElementById('err').innerText=data.msg; return; }
+  localStorage.setItem('logged','yes'); localStorage.setItem('username',username); localStorage.setItem('code',code);
+  myName=username;
+  document.getElementById('login').style.display='none';
+  document.getElementById('main').style.display='flex';
+  connectSocket();
+}
+function connectSocket(){
+  socket=io();
+  socket.emit('join',{username:myName,deviceId});
+  socket.on('group-msg',d=>{ if(chatType==='group') addMsg(d.username+': '+d.msg,false); });
+  socket.on('private-msg',d=>{ addMsg(d.from+': '+d.msg,false); });
+  socket.on('ai-msg',d=>{ if(chatType==='ai') addMsg(d.msg,false); });
+  socket.on('users',list=>{ renderPrivate(list); });
+}
+function openGroup(){ currentChat='group'; chatType='group'; openChatScreen('GhostCom / أهلاً بگ','https://via.placeholder.com/40/00ff88/000?text=أ'); }
+function openAI(){ currentChat='ai'; chatType='ai'; openChatScreen('الذكاء الاصطناعي','https://via.placeholder.com/40/00ff88/000?text=AI'); }
+function openPrivate(user){ currentChat=user; chatType='private'; openChatScreen(user,'https://via.placeholder.com/40/25D366/fff?text='+user[0]); }
+function openChatScreen(name,avatar){
+  document.getElementById('main').style.display='none';
+  document.getElementById('chat-screen').style.display='flex';
+  document.getElementById('chatName').innerText=name;
+  document.getElementById('chatAvatar').src=avatar;
+  document.getElementById('messages').innerHTML='';
+}
+function closeChat(){ document.getElementById('chat-screen').style.display='none'; document.getElementById('main').style.display='flex'; currentChat=null; chatType=null; }
+function sendMsg(){
+  const input=document.getElementById('msgInput'); const msg=input.value.trim(); if(!msg) return;
+  addMsg(msg,true);
+  if(chatType==='group') socket.emit('group-msg',{username:myName,msg});
+  else if(chatType==='private') socket.emit('private-msg',{toUsername:currentChat,from:myName,msg});
+  else if(chatType==='ai') socket.emit('ai-msg',{msg});
+  input.value='';
+}
+function addMsg(text,isMe){
+  const div=document.createElement('div'); div.className='msg '+(isMe?'me':'other'); div.innerText=text;
+  document.getElementById('messages').appendChild(div);
+  document.getElementById('messages').scrollTop=document.getElementById('messages').scrollHeight;
+}
+function renderPrivate(list){
+  const container=document.getElementById('private-list'); container.innerHTML='';
+  list.forEach(u=>{
+    if(u.username===myName) return;
+    const d=document.createElement('div'); d.className='item'; d.onclick=()=>openPrivate(u.username);
+    d.innerHTML=`<img src="https://via.placeholder.com/55/25D366/fff?text=${u.username[0]}"><div class="info"><div class="name">${u.username}</div><div class="last">اضغط لبدء الخاص</div></div>`;
+    container.appendChild(d);
+  });
+}
+function startPrivate(){
+  const name=prompt('اكتب اسم الشخص للخاص:'); if(name) openPrivate(name);
+}
+document.getElementById('msgInput').addEventListener('keypress',e=>{ if(e.key==='Enter') sendMsg(); });
+</script>
+</body>
+</html>
