@@ -3,51 +3,64 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>GHOSTCOM</title>
+<title>GHOSTCOM - الأمن السيبراني</title>
 <style>
-*{box-sizing:border-box;font-family:Tahoma,system-ui}
-body{margin:0;min-height:100vh;background:#000 url('https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1000') center/cover no-repeat;display:flex;align-items:center;justify-content:center;padding:12px}
-body::before{content:'';position:fixed;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.2),rgba(0,0,0,.8))}
-.wrap{position:relative;z-index:1;width:100%;max-width:390px}
-.title{font-size:28px;font-weight:900;text-align:center;margin:0 0 12px;background:linear-gradient(90deg,#ff00ff,#ffff00);-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 10px #a855f7)}
-.card{background:rgba(255,255,255,0.08);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(168,85,247,.5);border-radius:28px;padding:18px;box-shadow:0 0 40px rgba(124,58,237,.4),inset 0 0 20px rgba(255,255,255,.05)}
-.top{display:flex;align-items:center;gap:8px;margin-bottom:14px;opacity:.9;font-size:12px;letter-spacing:1px}
-.top b{color:#a78bfa}
-.label{font-size:11px;opacity:.7;margin:8px 4px 4px;text-align:right}
-input{width:100%;padding:13px 12px;border-radius:14px;border:1px solid rgba(255,255,255,.15);background:rgba(15,23,42,.8);color:#fff;text-align:center;font-size:15px;outline:none}
-input::placeholder{color:#94a3b8}
-.row{display:flex;gap:10px;margin-top:12px}
-.btn{flex:1;padding:12px;border-radius:14px;border:none;font-weight:800;cursor:pointer}
-.btn-blue{background:linear-gradient(90deg,#7c3aed,#06b6d4);color:#fff}
-.btn-dark{background:rgba(30,41,59,.9);color:#fff;border:1px solid rgba(255,255,255,.15)}
-.big{width:100%;margin-top:16px;padding:16px;border-radius:18px;background:linear-gradient(90deg,#8b5cf6,#06b6d4);border:1px solid rgba(255,255,255,.3);color:#fff;font-weight:900;font-size:18px;letter-spacing:1px;cursor:pointer;box-shadow:0 0 20px rgba(139,92,246,.6)}
-.msg{text-align:center;margin-top:10px;font-size:13px;min-height:18px}
-.ok{color:#4ade80}.err{color:#fb7185}
-.footer{margin-top:18px;text-align:center;background:rgba(0,0,0,.6);padding:10px;border-radius:14px;font-size:12px}
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@900&display=swap');
+*{box-sizing:border-box;font-family:'Cairo',Tahoma}
+body{margin:0;min-height:100vh;background:#000 url('bg.jpg') center top/cover no-repeat fixed;display:flex;align-items:center;justify-content:center;padding:12px}
+.overlay{position:fixed;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.3),rgba(0,0,0,.85))}
+.wrap{position:relative;z-index:2;width:100%;max-width:400px}
+.main-title{text-align:center;font-size:34px;font-weight:900;margin:0 0 18px;background:linear-gradient(90deg,#ff00ff,#00ffff,#ffff00);-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 15px #a855f7);letter-spacing:2px}
+.house{background:rgba(255,255,255,0.08);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(168,85,247,.45);border-radius:20px;padding:14px;margin-bottom:12px;box-shadow:0 8px 32px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.1);transition:.3s}
+.house:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(124,58,237,.5)}
+.house-label{text-align:center;font-size:14px;font-weight:800;margin-bottom:8px;color:#e9d5ff;text-shadow:0 0 8px #a855f7}
+input{width:100%;padding:13px;border-radius:14px;border:1px solid rgba(255,255,255,.2);background:rgba(15,23,42,.85);color:#fff;text-align:center;font-size:15px;outline:none}
+.house1{border-color:#ff00ff;box-shadow:0 0 20px rgba(255,0,255,.3)}
+.house2{border-color:#00ffff;box-shadow:0 0 20px rgba(0,255,255,.3)}
+.house3{border-color:#ffff00;box-shadow:0 0 20px rgba(255,255,0,.2)}
+.house4{border-color:#00ff88;box-shadow:0 0 20px rgba(0,255,136,.4)}
+.house5{border-color:#a855f7;text-align:center;font-size:12px;opacity:.8}
+.btn{width:100%;padding:14px;border-radius:14px;border:none;font-weight:900;font-size:16px;cursor:pointer;color:#fff}
+.btn-check{background:linear-gradient(90deg,#f59e0b,#ef4444)}
+.btn-enter{background:linear-gradient(90deg,#22c55e,#06b6d4);font-size:18px;letter-spacing:1px;box-shadow:0 0 25px rgba(34,197,94,.5)}
+.msg{text-align:center;margin-top:8px;font-size:12px;min-height:16px}
 </style>
 </head>
 <body>
+<div class="overlay"></div>
 <div class="wrap">
-<h1 class="title">حماية سيبراني</h1>
-<div class="card">
-<div class="top">👻 <b>GHOSTCOM</b> <span style="margin-right:auto">SECURE CHANNEL • LOGIN</span></div>
+<h1 class="main-title">الأمن السيبراني</h1>
 
-<div class="label">YOUR NAME</div>
-<input id="nameInput" value="Specter_00" placeholder="اسمك">
-
-<div style="margin-top:12px;background:rgba(0,0,0,.4);padding:12px;border-radius:16px;border:1px solid rgba(255,255,255,.08)">
-<div class="label" style="text-align:center;margin:0 0 8px">حط الكود الدخول</div>
-<input id="codeInput" placeholder="GHOST-XXXX">
-<div class="row">
-<button class="btn btn-blue" onclick="verify()">✓ دخول</button>
-<button class="btn btn-dark" onclick="clearForm()">ارجاء التحقق</button>
+<!-- البيت 1 -->
+<div class="house house1">
+<div class="house-label">✨ اسمك ✨</div>
+<input id="nameInput" placeholder="Specter_00" value="Specter_00">
 </div>
+
+<!-- البيت 2 -->
+<div class="house house2">
+<div class="house-label">🔑 حط الكود الاشتراك 🔑</div>
+<input id="codeInput" placeholder="GHOST-XXXX">
+</div>
+
+<!-- البيت 3 -->
+<div class="house house3">
+<div class="house-label">🔍 الرجاء اتحقق 🔍</div>
+<button class="btn btn-check" onclick="verify()">الرجاء التحقق</button>
 <div id="status" class="msg"></div>
 </div>
 
-<button class="big" onclick="enterApp()">ENTER GHOSTCOM</button>
+<!-- البيت 4 -->
+<div class="house house4">
+<div class="house-label">🛡️ انت الان امن للامن السيبراني 🛡️</div>
+<button class="btn btn-enter" onclick="enterApp()">ENTER GHOSTCOM</button>
 </div>
-<div class="footer">📞 تواصل مع المطور<br>+967717337861</div>
+
+<!-- البيت 5 -->
+<div class="house house5">
+👨‍💻 المطور<br><b style="color:#a78bfa;direction:ltr;display:inline-block">+967717337861</b>
+</div>
+
 </div>
 
 <script>
@@ -56,25 +69,24 @@ function verify(){
  let code=document.getElementById('codeInput').value.trim().toUpperCase();
  let name=document.getElementById('nameInput').value.trim()||'Specter';
  let s=document.getElementById('status');
- if(code.length<6 || !code.includes('GHOST')){s.innerHTML='<span class=err>⛔ اكتب كود يبدأ بـ GHOST-</span>';verified=false;return;}
+ if(!code.startsWith('GHOST-') || code.length<8){
+  s.innerHTML='<span style="color:#fb7185">⛔ الكود لازم يبدأ بـ GHOST-</span>';verified=false;return;
+ }
  let used=JSON.parse(localStorage.getItem('ghost_used_codes')||'[]');
- if(used.includes(code)){s.innerHTML='<span class=err>⛔ الكود مستخدم من قبل</span>';verified=false;return;}
+ if(used.includes(code)){s.innerHTML='<span style="color:#fb7185">⛔ الكود مستخدم</span>';verified=false;return;}
  localStorage.setItem('ghost_session',JSON.stringify({name:name,code:code}));
  localStorage.setItem('ghost_temp_verified',code);
- s.innerHTML='<span class=ok>✅ تمام يا '+name+' اضغط ENTER GHOSTCOM</span>';
+ s.innerHTML='<span style="color:#4ade80">✅ تم يا '+name+' - انزل للبيت الرابع</span>';
  verified=true;
 }
 function enterApp(){
- if(!verified) verify();
- if(!verified) return;
+ if(!verified){verify(); if(!verified) return;}
  let code=localStorage.getItem('ghost_temp_verified');
  let used=JSON.parse(localStorage.getItem('ghost_used_codes')||'[]');
  if(!used.includes(code)){used.push(code);localStorage.setItem('ghost_used_codes',JSON.stringify(used));}
  location.href='home.html';
 }
-function clearForm(){document.getElementById('codeInput').value='';document.getElementById('status').innerHTML='';verified=false;}
-// رابط لتصفير الاكواد لو علق: ?reset=1
-if(location.search.includes('reset=1')){localStorage.removeItem('ghost_used_codes');alert('تم تصفير الأكواد');}
+if(location.search.includes('reset=1')){localStorage.removeItem('ghost_used_codes');alert('تم مسح الأكواد');}
 </script>
 </body>
 </html>
