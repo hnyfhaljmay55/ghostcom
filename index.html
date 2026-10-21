@@ -3,151 +3,141 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GhostCom - مملكة التعارف</title>
-<script src="/socket.io/socket.io.js"></script>
+<title>GHOSTCOM</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Cairo:wght@400;700&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Tahoma}
-body{background:#111;color:#fff;height:100vh;overflow:hidden}
-#login{position:fixed;inset:0;background:linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.8)),url('https://images.unsplash.com/photo-1519608487953-e999c86e7455');background-size:cover;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:20px}
-#login .box{background:rgba(20,20,20,.9);padding:25px;border-radius:15px;width:100%;max-width:350px;text-align:center;border:1px solid #333}
-#login input{width:100%;padding:12px;margin:8px 0;border-radius:10px;border:none;outline:none}
-#login button{width:100%;padding:12px;background:#00ff88;border:none;border-radius:10px;color:#000;font-weight:bold;font-size:16px;margin-top:10px}
-#main{display:none;height:100vh;flex-direction:column;background:#0a0a0a}
-.top-search{padding:10px;background:#202020;display:flex;gap:10px;align-items:center}
-.top-search input{flex:1;padding:10px;border-radius:20px;border:none;background:#2a2a2a;color:#fff;outline:none}
-.chat-list{flex:1;overflow-y:auto}
-.item{display:flex;gap:12px;padding:12px 15px;border-bottom:1px solid #222;align-items:center}
-.item img{width:55px;height:55px;border-radius:50%;object-fit:cover}
-.item .info{flex:1}
-.item .name{font-weight:bold}
-.item .last{font-size:12px;color:#aaa;margin-top:3px}
-.fixed{ background:#1a1a2e; border-left:4px solid #00ff88;}
-.bottom{padding:10px;background:#202020;display:flex;justify-content:space-between;align-items:center}
-.bottom .btn{width:50px;height:50px;border-radius:50%;border:none;display:flex;justify-content:center;align-items:center;font-size:24px}
-.btn-ai{background:#222;border:2px solid #00ff88 !important}
-.btn-plus{background:#00ff88}
-#chat-screen{display:none;position:fixed;inset:0;background:#0e0e0e;flex-direction:column}
-#chat-header{padding:12px;background:#202020;display:flex;align-items:center;gap:10px}
-#messages{flex:1;overflow-y:auto;padding:15px;display:flex;flex-direction:column;gap:8px;background-image:url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png')}
-.msg{max-width:75%;padding:8px 12px;border-radius:12px;font-size:14px}
-.me{align-self:flex-end;background:#005c4b}
-.other{align-self:flex-start;background:#202c33}
-#input-bar{padding:10px;background:#202020;display:flex;gap:8px}
-#input-bar input{flex:1;padding:10px;border-radius:20px;border:none;background:#2a2a2a;color:#fff}
-#input-bar button{padding:10px 15px;border-radius:20px;border:none;background:#00ff88;color:#000}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Cairo',sans-serif;background:#050a14;min-height:100vh;overflow:hidden}
+
+/* LOGIN SCREEN - مثل الصورة الثانية */
+#loginScreen{
+height:100vh;background:url('https://images.unsplash.com/photo-1519608487953-e999c86e7455?w=1200') center/cover;
+display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative
+}
+#loginScreen::before{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0.3),rgba(5,10,20,0.9))}
+.glass{
+position:relative;z-index:2;width:88%;max-width:360px;background:rgba(255,255,255,0.08);
+backdrop-filter:blur(20px);border:1px solid rgba(0,255,255,0.3);border-radius:28px;
+padding:35px 25px;box-shadow:0 0 40px rgba(0,255,255,0.15), inset 0 0 20px rgba(255,255,255,0.05)
+}
+.logo{font-family:'Orbitron';font-size:28px;color:#00e5ff;text-align:center;letter-spacing:2px;text-shadow:0 0 15px #00e5ff}
+.logo small{display:block;font-size:9px;letter-spacing:4px;color:#aaa;margin-top:4px;font-family:'Orbitron'}
+.label{color:#00e5ff;font-size:13px;margin:25px 0 8px;text-align:left}
+.inp{width:100%;padding:14px 16px;background:rgba(255,255,255,0.07);border:1.5px solid rgba(255,0,255,0.4);
+border-radius:14px;color:white;outline:none;font-size:14px}
+.inp:focus{border-color:#00e5ff;box-shadow:0 0 15px rgba(0,229,255,0.4)}
+.btn-login{
+width:100%;margin-top:22px;padding:14px;background:linear-gradient(90deg,#7c3aed,#00e5ff);
+border:none;border-radius:14px;color:white;font-family:'Orbitron';font-size:16px;font-weight:700;cursor:pointer;
+box-shadow:0 0 20px rgba(124,58,237,0.5)
+}
+.links{text-align:center;margin-top:18px;font-size:12px;color:#ccc}
+.links b{color:#00e5ff;cursor:pointer}
+
+/* CHAT SCREEN - مثل الصورة الأولى */
+#chatScreen{display:none;height:100vh;background:#050a14;flex-direction:column;position:relative}
+#chatScreen::before{
+content:'';position:absolute;inset:0;
+background:url('https://images.unsplash.com/photo-1519125323398-675f0ddb6308?w=800') center/cover;
+opacity:0.15;filter:hue-rotate(200deg)
+}
+.topBar{
+position:relative;z-index:2;margin:12px;padding:12px 16px;
+background:rgba(0,0,0,0.6);border:1.5px solid #00e5ff;border-radius:18px;
+display:flex;align-items:center;justify-content:space-between;
+box-shadow:0 0 15px rgba(0,229,255,0.3);clip-path:polygon(3% 0,100% 0,97% 100%,0% 100%)
+}
+.topBar .user{display:flex;align-items:center;gap:10px}
+.topBar img{width:38px;height:38px;border-radius:50%;border:1.5px solid #ff00ff}
+.topBar h3{font-size:13px;color:white;line-height:1.1}
+.topBar span{font-size:10px;color:#00ff88}
+
+#messages{
+flex:1;position:relative;z-index:2;padding:15px;display:flex;flex-direction:column;gap:14px;overflow-y:auto
+}
+.bubble{
+max-width:78%;padding:12px 14px;border-radius:18px;font-size:13.5px;line-height:1.5;position:relative
+}
+.bubble.left{
+align-self:flex-start;background:rgba(0,0,0,0.7);border:1px solid #00e5ff;
+border-radius:18px 18px 18px 4px;color:#c8f7ff;box-shadow:0 0 10px rgba(0,229,255,0.2)
+}
+.bubble.right{
+align-self:flex-end;background:rgba(20,0,20,0.7);border:1px solid #ff00aa;
+border-radius:18px 18px 4px 18px;color:#ffd6f0;box-shadow:0 0 10px rgba(255,0,170,0.2)
+}
+.bubble .time{font-size:10px;opacity:0.6;margin-top:6px;display:block;text-align:left}
+
+.voice{
+display:flex;align-items:center;gap:10px;background:rgba(0,0,0,0.7);border:1px solid #ff00aa;
+padding:10px 14px;border-radius:20px;max-width:85%
+}
+.play{width:36px;height:36px;border-radius:50%;background:rgba(255,0,170,0.2);border:1.5px solid #ff00aa;
+display:flex;align-items:center;justify-content:center;color:#ff00aa}
+
+.bottomBar{
+position:relative;z-index:2;margin:10px;padding:8px 12px;
+background:rgba(0,0,0,0.7);border:1.5px solid rgba(0,229,255,0.5);border-radius:30px;
+display:flex;align-items:center;gap:8px;box-shadow:0 0 15px rgba(0,229,255,0.2)
+}
+.bottomBar input{flex:1;background:transparent;border:none;color:white;outline:none;font-size:14px}
+.icon{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.icon.send{background:linear-gradient(135deg,#ff00aa,#7c3aed)}
+.icon.mic{border:1px solid #ff00aa;color:#ff00aa}
 </style>
 </head>
 <body>
-<div id="login">
-  <div class="box">
-    <h2>👻 GhostCom</h2>
-    <p style="color:#aaa;margin:10px 0">مملكة التعارف - التواصل العالمي</p>
-    <input id="username" placeholder="اسم المستخدم">
-    <input id="code" placeholder="كود الاشتراك 8 حروف">
-    <input id="room" placeholder="رقم الغرفة (اختياري)">
-    <button onclick="doLogin()">دخول</button>
-    <p id="err" style="color:#ff4444;margin-top:10px"></p>
-  </div>
+
+<div id="loginScreen">
+<div class="glass">
+<div class="logo">👻 GHOSTCOM<small>SECURE CHANNEL • LOGIN</small></div>
+<div class="label">EMAIL</div>
+<input class="inp" id="email" placeholder="name@example.com" style="direction:ltr">
+<input class="inp" id="username" placeholder="اسم المستخدم" style="margin-top:12px">
+<button class="btn-login" onclick="login()">LOGIN</button>
+<div class="links">Forgot Password?<br><br>Don't have an account?<br><b>Create Account</b></div>
 </div>
-<div id="main">
-  <div class="top-search">
-    <input placeholder="بحث...">
-  </div>
-  <div class="chat-list" id="chat-list">
-    <div class="item fixed" onclick="openGroup()">
-      <img src="https://via.placeholder.com/55/00ff88/000?text=أ" >
-      <div class="info"><div class="name">GhostCom / أهلاً بگ</div><div class="last">الجروب الرسمي - اضغط للدخول</div></div>
-    </div>
-    <div id="private-list"></div>
-  </div>
-  <div class="bottom">
-    <div style="display:flex;gap:10px">
-      <button class="btn btn-ai" onclick="openAI()">🤖</button>
-      <button class="btn btn-plus" onclick="startPrivate()">+</button>
-    </div>
-    <div style="color:#aaa;font-size:12px">خاص</div>
-  </div>
 </div>
-<div id="chat-screen">
-  <div id="chat-header">
-    <button onclick="closeChat()" style="background:none;border:none;color:#fff;font-size:20px">←</button>
-    <img id="chatAvatar" src="" style="width:40px;height:40px;border-radius:50%">
-    <div><div id="chatName" style="font-weight:bold"></div><div style="font-size:11px;color:#00ff88">متصل الآن</div></div>
-  </div>
-  <div id="messages"></div>
-  <div id="input-bar">
-    <input id="msgInput" placeholder="اكتب رسالة...">
-    <button onclick="sendMsg()">إرسال</button>
-  </div>
+
+<div id="chatScreen">
+<div class="topBar">
+<div class="user">
+<img src="https://i.pravatar.cc/100?img=8">
+<div><h3>وحدة ألفا | الدعم التقني</h3><span>● متصل الآن</span></div>
 </div>
+<div style="display:flex;gap:12px;font-size:18px">📞 ⋯</div>
+</div>
+
+<div id="messages">
+<div class="bubble left">مرحبا، هل جهزت ملفات المشروع؟ نحتاجها قبل اجتماع الليلة <span class="time">23:05</span></div>
+<div class="bubble right" style="padding:0;overflow:hidden">
+<div class="voice"><div class="play">▶</div><div style="flex:1"><div style="height:24px;background:repeating-linear-gradient(90deg,#ff00aa 0 2px,transparent 2px 4px);opacity:0.6"></div><div style="font-size:10px;margin-top:4px">رسالة صوتية 23:06</div></div><div>0:12</div></div>
+</div>
+<div class="bubble right">أكيد، رفعت الصور والفيديو الآن. تفقدها وأخبرني إذا تحتاج تعديل <span class="time">23:07 ✓✓</span></div>
+</div>
+
+<div class="bottomBar">
+<div class="icon">📎</div>
+<input id="msgInput" placeholder="اكتب رسالة...">
+<div class="icon mic">🎙️</div>
+<div class="icon send" onclick="sendMsg()">◁</div>
+</div>
+</div>
+
 <script>
-let deviceId = localStorage.getItem('deviceId');
-if(!deviceId){ deviceId = Math.random().toString(36).substring(2,12); localStorage.setItem('deviceId', deviceId); }
-let socket, currentChat=null, chatType=null, myName=null;
-if(localStorage.getItem('logged')==='yes'){
-  myName = localStorage.getItem('username');
-  document.getElementById('login').style.display='none';
-  document.getElementById('main').style.display='flex';
-  connectSocket();
+function login(){
+ let u=document.getElementById('username').value.trim();
+ if(!u){alert('اكتب اسمك');return}
+ document.getElementById('loginScreen').style.display='none';
+ document.getElementById('chatScreen').style.display='flex';
 }
-async function doLogin(){
-  const username=document.getElementById('username').value.trim();
-  const code=document.getElementById('code').value.trim().toUpperCase();
-  if(!username || !code){ document.getElementById('err').innerText='اكتب الاسم والكود'; return; }
-  const res = await fetch('/check-code',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({code,deviceId,username})});
-  const data=await res.json();
-  if(!data.ok){ document.getElementById('err').innerText=data.msg; return; }
-  localStorage.setItem('logged','yes'); localStorage.setItem('username',username); localStorage.setItem('code',code);
-  myName=username;
-  document.getElementById('login').style.display='none';
-  document.getElementById('main').style.display='flex';
-  connectSocket();
-}
-function connectSocket(){
-  socket=io();
-  socket.emit('join',{username:myName,deviceId});
-  socket.on('group-msg',d=>{ if(chatType==='group') addMsg(d.username+': '+d.msg,false); });
-  socket.on('private-msg',d=>{ addMsg(d.from+': '+d.msg,false); });
-  socket.on('ai-msg',d=>{ if(chatType==='ai') addMsg(d.msg,false); });
-  socket.on('users',list=>{ renderPrivate(list); });
-}
-function openGroup(){ currentChat='group'; chatType='group'; openChatScreen('GhostCom / أهلاً بگ','https://via.placeholder.com/40/00ff88/000?text=أ'); }
-function openAI(){ currentChat='ai'; chatType='ai'; openChatScreen('الذكاء الاصطناعي','https://via.placeholder.com/40/00ff88/000?text=AI'); }
-function openPrivate(user){ currentChat=user; chatType='private'; openChatScreen(user,'https://via.placeholder.com/40/25D366/fff?text='+user[0]); }
-function openChatScreen(name,avatar){
-  document.getElementById('main').style.display='none';
-  document.getElementById('chat-screen').style.display='flex';
-  document.getElementById('chatName').innerText=name;
-  document.getElementById('chatAvatar').src=avatar;
-  document.getElementById('messages').innerHTML='';
-}
-function closeChat(){ document.getElementById('chat-screen').style.display='none'; document.getElementById('main').style.display='flex'; currentChat=null; chatType=null; }
 function sendMsg(){
-  const input=document.getElementById('msgInput'); const msg=input.value.trim(); if(!msg) return;
-  addMsg(msg,true);
-  if(chatType==='group') socket.emit('group-msg',{username:myName,msg});
-  else if(chatType==='private') socket.emit('private-msg',{toUsername:currentChat,from:myName,msg});
-  else if(chatType==='ai') socket.emit('ai-msg',{msg});
-  input.value='';
+ let i=document.getElementById('msgInput');
+ let t=i.value.trim(); if(!t) return;
+ let m=document.getElementById('messages');
+ m.innerHTML+=`<div class="bubble right">${t}<span class="time">الآن ✓✓</span></div>`;
+ i.value=''; m.scrollTop=m.scrollHeight;
 }
-function addMsg(text,isMe){
-  const div=document.createElement('div'); div.className='msg '+(isMe?'me':'other'); div.innerText=text;
-  document.getElementById('messages').appendChild(div);
-  document.getElementById('messages').scrollTop=document.getElementById('messages').scrollHeight;
-}
-function renderPrivate(list){
-  const container=document.getElementById('private-list'); container.innerHTML='';
-  list.forEach(u=>{
-    if(u.username===myName) return;
-    const d=document.createElement('div'); d.className='item'; d.onclick=()=>openPrivate(u.username);
-    d.innerHTML=`<img src="https://via.placeholder.com/55/25D366/fff?text=${u.username[0]}"><div class="info"><div class="name">${u.username}</div><div class="last">اضغط لبدء الخاص</div></div>`;
-    container.appendChild(d);
-  });
-}
-function startPrivate(){
-  const name=prompt('اكتب اسم الشخص للخاص:'); if(name) openPrivate(name);
-}
-document.getElementById('msgInput').addEventListener('keypress',e=>{ if(e.key==='Enter') sendMsg(); });
 </script>
 </body>
-</html>
+  </html>
