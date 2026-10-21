@@ -1,44 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>GHOSTCOM</title>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<!DOCTYPE html><html dir="rtl" lang="ar"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>حماية السيبراني</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=Orbitron:wght@700&family=Cairo:wght@600;800&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box}
-body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#000 url('bg1.jpg') center/cover no-repeat fixed;font-family:'Share Tech Mono',monospace}
-body::before{content:'';position:fixed;inset:0;background:rgba(0,0,0,.45)}
-.glass{position:relative;z-index:1;width:92%;max-width:380px;padding:26px 22px;background:rgba(255,255,255,.08);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border:1px solid rgba(168,85,247,.5);border-radius:26px;box-shadow:0 0 40px rgba(139,92,246,.4)}
-.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
-.logo{font-family:Orbitron;color:#fff;letter-spacing:2px}
-.logo span{color:#a855f7}
-.small{font-size:8px;letter-spacing:1.2px;color:#7ec8ff}
-label{display:block;font-size:10px;letter-spacing:1.6px;color:#8ec8ff;margin:16px 4px 6px;font-weight:700}
-.input{width:100%;padding:14px;border-radius:12px;border:1px solid rgba(168,85,247,.5);background:rgba(0,0,0,.35);color:#fff;outline:none}
-.input:focus{border-color:#22d3ee;box-shadow:0 0 18px rgba(34,211,238,.4)}
-.btn{width:100%;margin-top:20px;padding:14px;border:none;border-radius:14px;background:linear-gradient(90deg,#7c3aed,#06b6d4);color:#fff;font-family:Orbitron;font-weight:800;cursor:pointer;box-shadow:0 0 22px rgba(124,58,237,.6)}
-#msg{text-align:center;margin-top:12px;font-size:12px}
-</style>
-</head>
-<body>
-<div class="glass">
-<div class="top"><div class="logo">👻 <span>GHOST</span>COM</div><div class="small">SECURE CHANNEL • LOGIN</div></div>
-<label>YOUR NAME</label><input id="name" class="input" placeholder="Specter_09">
-<label>ROOM NUMBER</label><input class="input" value="GHOST-IBB-YE" readonly>
-<label>SERVER ADDRESS</label><input id="server" class="input" placeholder="curriculum-comply...trycloudflare.com">
-<label>SUBSCRIPTION CODE</label><input id="code" class="input" placeholder="GHOST-XXXX">
-<button class="btn" onclick="go()">ENTER GHOSTCOM</button>
-<div id="msg"></div>
+*{box-sizing:border-box;margin:0;padding:0}body{min-height:100vh;background:#000 url('bg1.jpg') center/cover no-repeat;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:20px 14px;font-family:'Cairo',sans-serif}
+h1{font-family:'Amiri';font-size:38px;background:linear-gradient(90deg,#ff00ff,#00ffff,#ffea00);-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 12px #a855f7);text-align:center;margin-top:18px;letter-spacing:1px}
+.card{width:100%;max-width:360px;background:rgba(15,18,35,.88);backdrop-filter:blur(20px);border:1px solid rgba(168,85,247,.5);border-radius:22px;padding:20px;box-shadow:0 0 30px rgba(124,58,237,.4)}
+.lab{color:#c084fc;font-size:13px;margin-bottom:8px;text-align:center}
+.inp{width:100%;padding:15px;border-radius:14px;background:rgba(0,0,0,.6);border:1px solid #a855f7;color:#fff;font-size:15px;text-align:center;outline:none}
+.btns{display:flex;gap:10px;margin-top:16px}
+.btn{flex:1;padding:13px;border:none;border-radius:12px;font-weight:800;cursor:pointer;font-family:'Cairo'}
+.b1{background:rgba(255,255,255,.08);color:#fff;border:1px solid #a855f7}
+.b2{background:linear-gradient(90deg,#7c3aed,#06b6d4);color:#fff;box-shadow:0 6px 20px rgba(124,58,237,.5)}
+.footer{width:100%;max-width:360px;text-align:center;padding:12px;background:rgba(0,0,0,.6);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.15);border-radius:14px;font-size:13px;color:#94e2ff}
+</style></head><body>
+<h1>حُـمـايـة الـسـيـبـرانـي</h1>
+<div class="card">
+<div class="lab">حط الكود الدخول</div>
+<input id="code" class="inp" placeholder="GHOST-XXXX">
+<div class="btns">
+<button class="btn b1" onclick="checkCode()">ارجاء التحقق</button>
+<button class="btn b2" onclick="enter()">دخول ✓</button>
 </div>
+<div id="msg" style="text-align:center;margin-top:10px;font-size:12px;color:#86efac"></div>
+</div>
+<div class="footer">📞 اتواصل مع المطور<br>+967717337861</div>
 <script>
-function go(){
- const n=document.getElementById('name').value.trim(), s=document.getElementById('server').value.trim(), c=document.getElementById('code').value.trim().toUpperCase();
- const codes=JSON.parse(localStorage.getItem('ghost_codes')||'[]'); const m=document.getElementById('msg');
- if(!n||!s||!c){m.style.color='#ff8a8a';m.textContent='عبي كل الحقول';return}
- if(!codes.includes(c) && !c.startsWith('GHOST-')){m.style.color='#ff8a8a';m.textContent='كود الاشتراك غلط';return}
- localStorage.setItem('ghost_session',JSON.stringify({name:n,server:s}));
- m.style.color='#7effb2';m.textContent='تم - جاري الدخول...'; setTimeout(()=>location.href='home.html',700);
+let verified=false;
+function checkCode(){
+ let c=document.getElementById('code').value.trim().toUpperCase();
+ if(!c){alert('حط الكود');return;}
+ let codes=JSON.parse(localStorage.getItem('ghost_codes')||'[]');
+ let found=codes.find(x=>x.code===c);
+ if(!found || found.used){document.getElementById('msg').innerHTML='⛔ الكود مستخدم أو غير صالح';verified=false;return;}
+ document.getElementById('msg').innerHTML='✅ الكود صحيح، تقدر تدخل';verified=true;
 }
-</script>
-</body>
-</html>
+function enter(){
+ if(!verified){alert('اضغط ارجاء التحقق أولا');return;}
+ let c=document.getElementById('code').value.trim().toUpperCase();
+ let codes=JSON.parse(localStorage.getItem('ghost_codes')||'[]');
+ let idx=codes.findIndex(x=>x.code===c);
+ codes[idx].used=true; codes[idx].usedAt=Date.now();
+ localStorage.setItem('ghost_codes',JSON.stringify(codes));
+ localStorage.setItem('ghost_session',JSON.stringify({code:c,name:'عضو',time:Date.now()}));
+ location.href='home.html';
+}
+(function(){if(!localStorage.getItem('ghost_codes')){localStorage.setItem('ghost_codes',JSON.stringify([{code:'GHOST-IBB-YE',used:false},{code:'GHOST-MASTER',used:false}]));}})();
+</script></body></html>
