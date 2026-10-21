@@ -1,88 +1,131 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>حماية السيبراني - GHOSTCOM</title>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700&family=Amiri:wght@700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHOSTCOM - Secure</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;800&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Cairo',sans-serif}
-body{min-height:100vh;display:flex;justify-content:center;align-items:center;background:#000 url('bg.jpg') center/cover no-repeat fixed}
-body::before{content:'';position:fixed;inset:0;background:rgba(0,5,20,0.55);backdrop-filter:blur(1px)}
-.neon{position:relative;z-index:2;background:rgba(5,10,30,0.82);border:1.5px solid #00e5ff88;border-radius:28px;padding:22px;width:92%;max-width:380px;box-shadow:0 0 40px #00e5ff66, inset 0 0 20px #00e5ff22}
-.inp{width:100%;background:rgba(10,15,35,0.9);border:1.5px solid #00e5ff55;border-radius:14px;padding:12px;color:#fff;text-align:center;outline:none;margin-top:6px}
-.btn{width:100%;background:linear-gradient(90deg,#00aaff,#00e5ff);border:none;border-radius:30px;padding:13px;font-weight:800;color:#000;margin-top:14px;cursor:pointer;box-shadow:0 0 20px #00e5ff99}
-.chat{display:none;position:fixed;inset:0;background:#050a1e url('bg.jpg') center/cover no-repeat fixed;flex-direction:column;z-index:10}
-.chat::before{content:'';position:fixed;inset:0;background:rgba(5,10,30,0.75)}
-.head{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:center;padding:10px 12px;margin:8px;border:1.5px solid #00e5ff55;border-radius:16px;background:#0a142edd}
-.group-title{font-family:'Amiri',serif;font-size:18px;background:linear-gradient(90deg,#00e5ff,#7b3eff,#00e5ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 8px #00e5ff);font-weight:700}
-.msgs{position:relative;z-index:2;flex:1;overflow-y:auto;padding:10px;display:flex;flex-direction:column;gap:7px}
-.m{max-width:82%;padding:9px 12px;border-radius:14px;font-size:13px;backdrop-filter:blur(8px)}
-.in{align-self:flex-start;background:#12264fee;border-radius:14px 14px 14px 0;border:1px solid #00e5ff33} .out{align-self:flex-end;background:#4a1568ee;border-radius:14px 14px 0 14px;border:1px solid #ff00aa44}
-.input-bar{position:relative;z-index:2;display:flex;align-items:center;gap:5px;padding:7px 10px;margin:8px;border:1.5px solid #00e5ff55;border-radius:30px;background:#0a142eee}
-.input-bar input{flex:1;background:transparent;border:none;outline:none;color:#fff}
-.icon{cursor:pointer;font-size:18px}
+body{
+  min-height:100vh;
+  background: #000 url('bg.jpg') no-repeat center center fixed;
+  background-size: cover;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+}
+body::before{
+  content:'';
+  position:absolute;inset:0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.85) 100%);
+}
+.container{
+  position:relative;z-index:2;
+  width:90%;max-width:360px;
+  text-align:center;
+}
+.title{
+  font-size:38px;font-weight:800;color:#fff;
+  text-shadow: 0 0 15px #a855f7, 0 0 30px #a855f7;
+  margin-bottom:5px;
+}
+.subtitle{
+  color:#c9b3ff;font-size:14px;
+  background: rgba(0,0,0,0.6);
+  display:inline-block;padding:4px 12px;border-radius:20px;
+  border:1px solid rgba(168,85,247,0.3);
+  margin-bottom:25px;
+}
+.neon-box{
+  background: rgba(0,0,0,0.85);
+  border: 1.5px solid #ff3b9a;
+  border-radius:18px;
+  padding:14px 18px;
+  margin-bottom:18px;
+  box-shadow: 0 0 10px rgba(255,59,154,0.6), 0 0 25px rgba(255,59,154,0.3), inset 0 0 10px rgba(255,59,154,0.15);
+  position:relative;
+  overflow:hidden;
+}
+.neon-box::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background: linear-gradient(90deg, transparent, #00ffff, #ff3b9a, transparent);
+}
+.neon-box.welcome{
+  border-color:#ff8bd1;
+  box-shadow: 0 0 15px rgba(255,100,180,0.7);
+}
+.neon-box.welcome span{
+  font-size:26px;font-weight:800;
+  color:#fff;
+  text-shadow: 0 0 10px #ff3b9a;
+}
+.neon-input{
+  width:100%;
+  background:transparent;
+  border:none;
+  outline:none;
+  color:#fff;
+  font-size:18px;
+  font-weight:600;
+  text-align:center;
+}
+.neon-input::placeholder{color:#ff8bd1;opacity:0.9}
+.icon{font-size:22px;margin-left:8px;vertical-align:middle;filter: drop-shadow(0 0 5px #a855f7)}
+.btn-box{
+  background: linear-gradient(90deg, #0a0a0a, #1a1a1a);
+  border:1.5px solid #ff3b9a;
+  border-radius:18px;
+  padding:14px;
+  margin-top:10px;
+  cursor:pointer;
+  box-shadow: 0 0 15px rgba(255,59,154,0.6);
+  transition:0.3s;
+}
+.btn-box:active{transform:scale(0.97);box-shadow:0 0 25px #ff3b9a}
+.btn-text{
+  color:#fff;font-size:22px;font-weight:800;
+  text-shadow:0 0 10px #ff3b9a;
+}
+.footer{
+  margin-top:20px;color:#aaa;font-size:11px;
+}
 </style>
 </head>
 <body>
+<div class="container">
+  <div class="title">🔒🛡️ أهلاً بك</div>
+  <div class="subtitle">لوحة التحقق الآمن - سيبر سيكيورتي</div>
 
-<div id="login" class="neon">
-<h2 id="secretTitle" style="text-align:center;color:#00e5ff;letter-spacing:2px">GHOSTCOM</h2>
-<p style="text-align:center;font-family:'Amiri';font-size:22px;color:#fff;text-shadow:0 0 15px #00e5ff">༺ حماية السيبراني ༻</p>
-<p style="text-align:center;font-size:10px;color:#00e5ff;margin:6px">Secure Login • Access Terminal</p>
-<div style="font-size:11px;color:#7ad7ff;text-align:right;margin-top:10px">اسم المستخدم</div><input id="uname" class="inp" placeholder="أدخل اسم المستخدم">
-<div style="font-size:11px;color:#7ad7ff;text-align:right;margin-top:8px">رمز الدخول</div><input id="icode" class="inp" placeholder="أدخل الرمز السري GHOST-XXXX">
-<button class="btn" onclick="enterG()">تسجيل الدخول</button>
-<div style="font-size:9px;text-align:center;color:#5a7a9a;margin-top:10px">الكود يفتح مرة ويحترق تلقائياً ✅</div>
-</div>
+  <div class="neon-box welcome">
+    <span>👋 نورت ياغالي ✨</span>
+  </div>
 
-<div id="dev" class="neon" style="display:none">
-<h3 style="text-align:center;color:#00e5ff">👑 لوحة المالك</h3>
-<button class="btn" onclick="gen()">+ توليد كود جديد</button>
-<button class="btn" style="background:linear-gradient(90deg,#00e5a0,#00ff88);color:#000" onclick="share()">📤 نسخ آخر كود</button>
-<div id="list" style="max-height:220px;overflow:auto;margin-top:10px"></div>
-<button class="btn" style="background:#222;color:#fff" onclick="back()">رجوع</button>
-</div>
+  <div class="neon-box">
+    <span class="icon">👤</span>
+    <input id="username" class="neon-input" placeholder="حط اليوزر">
+  </div>
 
-<div id="chat" class="chat">
-<div class="head"><span onclick="logout()" style="cursor:pointer;color:#fff">← خروج</span><div style="text-align:center"><div class="group-title">༺ حماية السيبراني ༻</div><div style="font-size:9px;color:#00ff88">متصل 🟢</div></div><span onclick="gen()" style="background:#7b3eff;padding:5px 10px;border-radius:20px;font-size:11px;cursor:pointer;color:#fff">+ كود</span></div>
-<div class="msgs" id="msgs"></div>
-<div class="input-bar">
-<span class="icon" onclick="imgInput.click()">📷</span>
-<span class="icon" onclick="videoInput.click()">🎬</span>
-<span class="icon" id="recBtn" onclick="toggleRec()">🎤</span>
-<input id="minp" placeholder="رسالة..." onkeypress="if(event.key==='Enter')sendM()">
-<button style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#00aaff,#7b3eff);border:none;color:#fff" onclick="sendM()">◁</button>
-</div>
-<input type="file" id="imgInput" accept="image/*" hidden>
-<input type="file" id="videoInput" accept="video/*" hidden>
+  <div class="neon-box">
+    <span class="icon">⌨️</span>
+    <input id="code" class="neon-input" placeholder="حط الكود GHOST-XXXX" type="password">
+  </div>
+
+  <div class="neon-box btn-box" onclick="login()">
+    <div class="btn-text">✅ اتحقق</div>
+  </div>
+
+  <div class="footer">حماية مشفرة • لا تشارك كودك مع أحد • نأسف لأجلك</div>
 </div>
 
 <script>
-let myName="",last="", allMsgs=JSON.parse(localStorage.getItem('cyber_msgs')||'[]'), codes=JSON.parse(localStorage.getItem('cyber_codes')||'{"GHOST-IBB1-2026":{"used":false},"GHOST-TEST-1234":{"used":false}}'), rec, chunks=[], isRec=false, clickCount=0;
-
-secretTitle.onclick=()=>{clickCount++; if(clickCount>=7){let p=prompt("كلمة سر المالك:"); if(p==="Ghost@2026_Ibb"){login.style.display='none';dev.style.display='block';loadCodes();} clickCount=0;} setTimeout(()=>clickCount=0,3000);};
-
-function enterG(){
- let n=uname.value.trim(), c=icode.value.trim().toUpperCase();
- if(!n||!c){alert('اكتب الاسم والكود');return}
- if(c==="DEV-X9K2-ADMIN"){alert('اضغط 7 مرات على GHOSTCOM للدخول للوحة المالك');return;}
- if(!codes[c]){alert('كود خطأ ❌\nجرب: GHOST-IBB1-2026');return}
- if(codes[c].used){alert('الكود محروق 🔥 اطلب كود جديد');return}
- codes[c].used=true; codes[c].user=n; localStorage.setItem('cyber_codes',JSON.stringify(codes));
- localStorage.setItem('ghost_login',JSON.stringify({name:n,code:c}));
- myName=n; login.style.display='none'; chat.style.display='flex'; renderMsgs();
+function login(){
+  const u = document.getElementById('username').value.trim();
+  const c = document.getElementById('code').value.trim();
+  if(!u || !c){ alert('ياغالي حط اليوزر والكود 😅'); return; }
+  localStorage.setItem('ghost_user', u);
+  localStorage.setItem('ghost_code', c);
+  window.location.href = 'chat.html';
 }
-window.onload=()=>{let s=localStorage.getItem('ghost_login'); if(s){myName=JSON.parse(s).name; login.style.display='none'; chat.style.display='flex'; renderMsgs();}};
-function gen(){let ch='ABCDEFGHJKLMNPQRSTUVWXYZ23456789',a='',b='';for(let i=0;i<4;i++){a+=ch[Math.floor(Math.random()*ch.length)];b+=ch[Math.floor(Math.random()*ch.length)]}let nc='GHOST-'+a+'-'+b; codes[nc]={used:false}; last=nc; localStorage.setItem('cyber_codes',JSON.stringify(codes)); loadCodes(); alert('كود جديد: '+nc);}
-function share(){navigator.clipboard.writeText(last); alert('تم نسخ: '+last);}
-function loadCodes(){let h='';for(let k in codes){let v=codes[k]; h=`<div style="background:#000a;border:1px solid #00e5ff44;border-radius:8px;padding:6px;margin:4px 0;display:flex;justify-content:space-between;font-size:11px;color:#fff"><span>${k}</span><span style="color:${v.used?'#ff3a5a':'#00ff88'}">${v.used?'🔥'+(v.user||''):'✅'}</span></div>`+h;} list.innerHTML=h;}
-function back(){dev.style.display='none'; chat.style.display='none'; login.style.display='block';}
-function logout(){if(confirm('تسجيل خروج؟')){localStorage.removeItem('ghost_login'); back();}}
-function renderMsgs(){msgs.innerHTML=''; allMsgs.forEach(d=>{let el=document.createElement('div'); el.className='m '+(d.name===myName?'out':'in'); let c=d.text; if(d.type==='image') c=`<img src="${d.text}" style="max-width:180px;border-radius:8px" onclick="window.open(this.src)">`; else if(d.type==='video') c=`<video src="${d.text}" controls style="max-width:200px;border-radius:8px"></video>`; else if(d.type==='voice') c=`<audio controls src="${d.text}" style="width:160px"></audio>`; el.innerHTML=`<b style="font-size:9px;color:#00e5ff">${d.name}</b><br>${c}`; msgs.appendChild(el);}); msgs.scrollTop=99999;}
-function sendM(){let t=minp.value.trim(); if(!t)return; allMsgs.push({name:myName,text:t,type:'text'}); localStorage.setItem('cyber_msgs',JSON.stringify(allMsgs)); minp.value=''; renderMsgs();}
-imgInput.onchange=()=>{let f=imgInput.files[0]; let r=new FileReader(); r.onload=e=>{allMsgs.push({name:myName,type:'image',text:e.target.result}); localStorage.setItem('cyber_msgs',JSON.stringify(allMsgs)); renderMsgs();}; r.readAsDataURL(f);}
-videoInput.onchange=()=>{let f=videoInput.files[0]; let r=new FileReader(); r.onload=e=>{allMsgs.push({name:myName,type:'video',text:e.target.result}); localStorage.setItem('cyber_msgs',JSON.stringify(allMsgs)); renderMsgs();}; r.readAsDataURL(f);}
-function toggleRec(){if(!isRec){navigator.mediaDevices.getUserMedia({audio:true}).then(s=>{rec=new MediaRecorder(s); chunks=[]; rec.ondataavailable=e=>chunks.push(e.data); rec.onstop=()=>{let b=new Blob(chunks,{type:'audio/webm'}); let rd=new FileReader(); rd.onload=e=>{allMsgs.push({name:myName,type:'voice',text:e.target.result}); localStorage.setItem('cyber_msgs',JSON.stringify(allMsgs)); renderMsgs();}; rd.readAsDataURL(b);}; rec.start(); isRec=true; recBtn.innerText='⏹️';});} else{rec.stop(); isRec=false; recBtn.innerText='🎤';}}
 </script>
 </body>
 </html>
