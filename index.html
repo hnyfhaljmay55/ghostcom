@@ -3,128 +3,110 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GHOSTCOM - Secure</title>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;800&display=swap" rel="stylesheet">
+<title>GHOSTCOM</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700;900&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Cairo',sans-serif}
 body{
   min-height:100vh;
-  background: #000 url('bg.jpg') no-repeat center center fixed;
-  background-size: cover;
-  display:flex;align-items:center;justify-content:center;
+  background:#000 url('bg.jpg') no-repeat center top;
+  background-size:cover;
+  display:flex;justify-content:center;align-items:flex-start;
+  padding-top:18px;
+}
+.wrap{
+  width:100%;max-width:380px;
+  display:flex;flex-direction:column;align-items:center;
+  padding:0 18px 20px;
+}
+.top-line{
+  width:92%;height:4px;
+  background:linear-gradient(90deg,#ff1493,#00e5ff);
+  border-radius:10px;box-shadow:0 0 12px #ff1493;
+  margin-bottom:22px;
+}
+.h1{color:#e8d5ff;font-size:36px;font-weight:900;letter-spacing:1px;
+text-shadow:0 0 12px #a855f7,0 0 25px #a855f7;display:flex;gap:10px;align-items:center}
+.h1 b{color:#fff}
+.sub{
+  margin-top:6px;
+  background:rgba(0,0,0,0.7);color:#b9a7d6;font-size:13px;
+  padding:5px 14px;border-radius:12px;border:1px solid rgba(255,255,255,0.1)
+}
+.card{
+  width:320px;height:66px;
+  background:linear-gradient(180deg,#0f0f0f 0%,#000 100%);
+  border-radius:16px;
+  border:2px solid #ff2a7a;
+  box-shadow:0 0 6px #ff2a7a,0 0 18px rgba(255,42,122,0.5),inset 0 1px 0 rgba(0,255,255,0.4),inset 0 -1px 0 rgba(255,42,122,0.6);
+  display:flex;align-items:center;justify-content:center;gap:10px;
   position:relative;
+  margin-top:42px;
 }
-body::before{
-  content:'';
-  position:absolute;inset:0;
-  background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.85) 100%);
+.card::before{
+  content:'';position:absolute;top:-2px;left:10%;right:10%;height:2px;
+  background:linear-gradient(90deg,transparent,#00f0ff,#ff2a7a,transparent);
+  border-radius:10px;
 }
-.container{
-  position:relative;z-index:2;
-  width:90%;max-width:360px;
-  text-align:center;
+.card::after{
+  content:'';position:absolute;bottom:-2px;left:10%;right:10%;height:2px;
+  background:linear-gradient(90deg,transparent,#ff2a7a,#00f0ff,transparent);
+  border-radius:10px;
 }
-.title{
-  font-size:38px;font-weight:800;color:#fff;
-  text-shadow: 0 0 15px #a855f7, 0 0 30px #a855f7;
-  margin-bottom:5px;
+.card input{
+  background:transparent;border:none;outline:none;
+  color:#fff;font-size:21px;font-weight:900;text-align:center;
+  width:70%;text-shadow:0 0 10px #ff5ca8,-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;
 }
-.subtitle{
-  color:#c9b3ff;font-size:14px;
-  background: rgba(0,0,0,0.6);
-  display:inline-block;padding:4px 12px;border-radius:20px;
-  border:1px solid rgba(168,85,247,0.3);
-  margin-bottom:25px;
+.card input::placeholder{
+  color:#fff;text-shadow:0 0 10px #ff5ca8,0 0 20px #ff2a7a,2px 2px 0 #000;
 }
-.neon-box{
-  background: rgba(0,0,0,0.85);
-  border: 1.5px solid #ff3b9a;
-  border-radius:18px;
-  padding:14px 18px;
-  margin-bottom:18px;
-  box-shadow: 0 0 10px rgba(255,59,154,0.6), 0 0 25px rgba(255,59,154,0.3), inset 0 0 10px rgba(255,59,154,0.15);
-  position:relative;
-  overflow:hidden;
+.ico{font-size:28px;filter:drop-shadow(0 0 6px #a855f7)}
+.txt{
+  color:#fff;font-size:23px;font-weight:900;
+  text-shadow:0 0 8px #ff4da6,0 0 15px #ff2a7a,2px 0 0 #000,-2px 0 0 #000,0 2px 0 #000;
+  letter-spacing:0.5px;
 }
-.neon-box::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:2px;
-  background: linear-gradient(90deg, transparent, #00ffff, #ff3b9a, transparent);
-}
-.neon-box.welcome{
-  border-color:#ff8bd1;
-  box-shadow: 0 0 15px rgba(255,100,180,0.7);
-}
-.neon-box.welcome span{
-  font-size:26px;font-weight:800;
-  color:#fff;
-  text-shadow: 0 0 10px #ff3b9a;
-}
-.neon-input{
-  width:100%;
-  background:transparent;
-  border:none;
-  outline:none;
-  color:#fff;
-  font-size:18px;
-  font-weight:600;
-  text-align:center;
-}
-.neon-input::placeholder{color:#ff8bd1;opacity:0.9}
-.icon{font-size:22px;margin-left:8px;vertical-align:middle;filter: drop-shadow(0 0 5px #a855f7)}
-.btn-box{
-  background: linear-gradient(90deg, #0a0a0a, #1a1a1a);
-  border:1.5px solid #ff3b9a;
-  border-radius:18px;
-  padding:14px;
-  margin-top:10px;
-  cursor:pointer;
-  box-shadow: 0 0 15px rgba(255,59,154,0.6);
-  transition:0.3s;
-}
-.btn-box:active{transform:scale(0.97);box-shadow:0 0 25px #ff3b9a}
-.btn-text{
-  color:#fff;font-size:22px;font-weight:800;
-  text-shadow:0 0 10px #ff3b9a;
-}
-.footer{
-  margin-top:20px;color:#aaa;font-size:11px;
-}
+.card.btn{cursor:pointer;margin-top:42px;background:linear-gradient(180deg,#1a1a1a,#000)}
+.card.btn:active{transform:scale(0.98);box-shadow:0 0 25px #ff2a7a}
+.foot{margin-top:32px;color:#c5b5dd;font-size:11px;text-shadow:0 0 5px #000}
 </style>
 </head>
 <body>
-<div class="container">
-  <div class="title">🔒🛡️ أهلاً بك</div>
-  <div class="subtitle">لوحة التحقق الآمن - سيبر سيكيورتي</div>
+<div class="wrap">
+  <div class="top-line"></div>
+  <div class="h1">🔒🛡️ أهلاً بك</div>
+  <div class="sub">لوحة التحقق الآمن - سيبر سيكيورتي</div>
 
-  <div class="neon-box welcome">
-    <span>👋 نورت ياغالي ✨</span>
+  <div class="card" style="margin-top:55px">
+    <span class="ico">🤙</span><span class="txt">نورت ياغالي ✨</span>
   </div>
 
-  <div class="neon-box">
-    <span class="icon">👤</span>
-    <input id="username" class="neon-input" placeholder="حط اليوزر">
+  <div class="card">
+    <span class="ico">✉️</span>
+    <input id="email" placeholder="حط الايميل">
   </div>
 
-  <div class="neon-box">
-    <span class="icon">⌨️</span>
-    <input id="code" class="neon-input" placeholder="حط الكود GHOST-XXXX" type="password">
+  <div class="card">
+    <span class="ico">⌨️</span>
+    <input id="code" type="password" placeholder="حط الكود">
   </div>
 
-  <div class="neon-box btn-box" onclick="login()">
-    <div class="btn-text">✅ اتحقق</div>
+  <div class="card btn" onclick="go()">
+    <span class="ico">🛡️</span><span class="txt">اتحقق</span>
   </div>
 
-  <div class="footer">حماية مشفرة • لا تشارك كودك مع أحد • نأسف لأجلك</div>
+  <div class="foot">حماية مشفرة • لا تشارك كودك مع أحد • نأسف لأجلك</div>
 </div>
 
 <script>
-function login(){
-  const u = document.getElementById('username').value.trim();
-  const c = document.getElementById('code').value.trim();
-  if(!u || !c){ alert('ياغالي حط اليوزر والكود 😅'); return; }
-  localStorage.setItem('ghost_user', u);
-  localStorage.setItem('ghost_code', c);
-  window.location.href = 'chat.html';
+function go(){
+  const e=document.getElementById('email').value.trim();
+  const c=document.getElementById('code').value.trim();
+  if(!e || !c){alert('حط الايميل والكود ياغالي');return;}
+  localStorage.setItem('ghost_email',e);
+  localStorage.setItem('ghost_code',c);
+  location.href='chat.html';
 }
 </script>
 </body>
