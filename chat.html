@@ -1,89 +1,53 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>GHOSTCOM - CHAT</title>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>دردشة</title>
 <style>
-*{box-sizing:border-box;font-family:Tahoma}
-body{margin:0;height:100vh;display:flex;flex-direction:column;background:#020617 url('bg.jpg') center/cover fixed;color:#fff}
-.header{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;background:rgba(0,0,0,.8);backdrop-filter:blur(10px);border-bottom:1px solid #a855f7}
-.msgs{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px;background:rgba(0,0,0,.6)}
-.bubble{max-width:80%;padding:10px 14px;border-radius:16px;font-size:14px;line-height:1.4}
-.me{align-self:flex-end;background:linear-gradient(90deg,#7c3aed,#06b6d4);border-bottom-left-radius:4px}
-.other{align-self:flex-start;background:rgba(255,255,255,.12);border-bottom-right-radius:4px}
-.input-area{display:flex;gap:8px;padding:10px;background:rgba(0,0,0,.85);border-top:1px solid #a855f7}
-input{flex:1;padding:12px;border-radius:20px;border:1px solid #334155;background:#0f172a;color:#fff;outline:none}
-button{padding:12px 16px;border-radius:20px;border:none;font-weight:800;cursor:pointer}
-.send{background:linear-gradient(90deg,#22c55e,#06b6d4);color:#fff}
-.back{background:#1e293b;color:#fff}
-.small{font-size:10px;opacity:.6;margin-top:3px}
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Cairo',sans-serif}
+body{height:100vh;display:flex;flex-direction:column;background:#000}
+.header{height:62px;background:rgba(0,0,0,0.85);border-bottom:1px solid rgba(168,85,247,0.3);display:flex;align-items:center;gap:10px;padding:0 12px}
+.header img{width:40px;height:40px;border-radius:50%;border:2px solid #a855f7}
+.header h3{color:#fff;font-size:14px}.header p{color:#a855f7;font-size:10px}
+.chat{flex:1;overflow-y:auto;padding:12px;background:url('bg6.jpg') center/cover;position:relative}
+.chat:before{content:'';position:absolute;inset:0;background:rgba(0,0,0,0.75)}
+.msgs{position:relative;z-index:1;display:flex;flex-direction:column;gap:10px}
+.msg{max-width:80%;padding:10px 14px;border-radius:18px;font-size:13px;line-height:1.5;word-break:break-word}
+.me{align-self:flex-end;background:linear-gradient(135deg,#8b5cf6,#7c3aed);color:#fff;border-bottom-right-radius:4px}
+.other{align-self:flex-start;background:rgba(255,255,255,0.08);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);color:#fff;border-bottom-left-radius:4px}
+.meta{font-size:9px;color:#c4b5fd;margin-top:5px;text-align:left}
+.inputbar{display:flex;gap:8px;padding:10px;background:rgba(0,0,0,0.9);border-top:1px solid rgba(168,85,247,0.3)}
+.inputbar input{flex:1;padding:12px 16px;border-radius:24px;border:1px solid rgba(168,85,247,0.3);background:rgba(255,255,255,0.06);color:#fff;outline:none}
+.btn{width:42px;height:42px;border-radius:50%;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.send{background:#a855f7;color:#fff}.icon{background:rgba(255,255,255,0.06);color:#a855f7;border:1px solid rgba(168,85,247,0.2)}
+.ai-badge{background:linear-gradient(90deg,#ec4899,#8b5cf6);color:#fff;font-size:9px;padding:2px 6px;border-radius:8px}
 </style>
 </head>
 <body>
 <div class="header">
-<button class="back" onclick="location.href='home.html'">⬅️ البيوت</button>
-<div id="roomTitle">البيت العام</div>
-<div id="myName" style="color:#a78bfa"></div>
+<div onclick="location.href='home.html'" style="color:#a855f7;font-size:22px;cursor:pointer">‹</div>
+<img id="roomImg" src="bg3.jpg"><div><h3 id="roomName">الجروب</h3><p id="roomStatus">مشفر • لا يمكن حذف الرسائل</p></div>
 </div>
-
-<div id="msgs" class="msgs"></div>
-
-<div class="input-area">
-<input id="txt" placeholder="اكتب رسالة..." onkeydown="if(event.key==='Enter')send()">
-<button class="send" onclick="send()">إرسال</button>
+<div class="chat" id="chat"><div class="msgs" id="msgs"></div></div>
+<div class="inputbar">
+<button class="btn icon" onclick="attach()">+</button>
+<input id="msgInput" placeholder="اكتب رسالة مشفرة..." onkeypress="if(event.key==='Enter')send()">
+<button class="btn icon" onclick="voice()">🎤</button>
+<button class="btn send" onclick="send()">➤</button>
 </div>
-
 <script>
-let session=JSON.parse(localStorage.getItem('ghost_session')||'null');
-if(!session) location.href='index.html';
-document.getElementById('myName').innerText=session.name;
-
-let params=new URLSearchParams(location.search);
-let room=params.get('room')||localStorage.getItem('ghost_room')||'general';
-let titles={general:'البيت الأحمر - العام',secret:'البيت الأزرق - السري',files:'البيت الأخضر - الملفات'};
-document.getElementById('roomTitle').innerText=titles[room]||room;
-
-let key='ghost_messages_'+room;
-
-function load(){
- let data=JSON.parse(localStorage.getItem(key)||'[]');
- let box=document.getElementById('msgs');
- box.innerHTML='';
- data.forEach(m=>{
-   let div=document.createElement('div');
-   div.className='bubble '+(m.name===session.name?'me':'other');
-   div.innerHTML=`<b>${m.name}</b><br>${m.text}<div class="small">${m.time}</div>`;
-   box.appendChild(div);
- });
- box.scrollTop=box.scrollHeight;
-}
-
-function send(){
- let input=document.getElementById('txt');
- let text=input.value.trim();
- if(!text) return;
- let data=JSON.parse(localStorage.getItem(key)||'[]');
- data.push({name:session.name,text:text,time:new Date().toLocaleTimeString()});
- // نحتفظ بآخر 100 رسالة فقط
- if(data.length>100) data=data.slice(-100);
- localStorage.setItem(key,JSON.stringify(data));
- input.value='';
- load();
- // محاكاة رد صديقك لو على نفس الجهاز - للاختبار
- // للمزامنة بين الأجهزة الحقيقية نحتاج Firebase وسأركبه لك في الخطوة القادمة
-}
-
-load();
-
-// تحديث تلقائي كل ثانية عشان لو صديقك أرسل رسالة من نفس المتصفح
-setInterval(load,1000);
-
-// تنبيه للمستخدم
-if(!localStorage.getItem('ghost_chat_notice')){
- alert('ملاحظة: هذه الدردشة تحفظ الرسائل على نفس الجهاز. عشان تراسل أصدقائك من أجهزة مختلفة، قل لي "ركب الفايربيس" وأنا أركب لك دردشة لحظية حقيقية تشتغل بين كل الأجهزة بدون حفظ على جهازك فقط.');
- localStorage.setItem('ghost_chat_notice','1');
-}
+let params=new URLSearchParams(location.search); let type=params.get('type')||localStorage.getItem('ghost_room')||'group';
+let myName=localStorage.getItem('ghost_name')||'مجهول';
+let roomMap={group:{name:'الجروب - العالمية',img:'bg3.jpg'},private:{name:'الخاص',img:'bg4.jpg'},ai:{name:'الذكاء الاصطناعي - خبير أمني',img:'bg2.jpg'}};
+let room=roomMap[type]||roomMap.group;
+document.getElementById('roomName').textContent=room.name; document.getElementById('roomImg').src=room.img;
+function getKey(){return 'ghost_msgs_'+type;}
+function loadMsgs(){let data=JSON.parse(localStorage.getItem(getKey())||'[]'); let box=document.getElementById('msgs'); box.innerHTML=''; data.forEach(m=>{let d=document.createElement('div'); d.className='msg '+(m.name===myName?'me':'other'); let h=''; if(m.name==='AI') h+='<span class=ai-badge>☠️ تحليل أمني</span><br>'; h+='<b style="font-size:11px;color:#c084fc">'+m.name+'</b><br>'+m.text; if(m.file) h+='<br><a href="'+m.file+'" target=_blank style="color:#a5f3fc">📎 '+m.fileName+'</a>'; h+='<div class=meta>'+m.time+' ✓✓</div>'; d.innerHTML=h; box.appendChild(d);}); document.getElementById('chat').scrollTop=99999;}
+function cyberReply(t){let l=t.toLowerCase(); let r='☠️ تحليل أمني جاري...<br>'; if(l.includes('اختراق')||l.includes('هكر')||l.includes('مخترق')){r+='تم رصد اختراق.<br>1. افحص العمليات<br>2. راجع الأذونات<br>3. فعل الجدار الناري<br>التوصية: VPN + 2FA.';} else if(l.includes('حماية')){r+='بروتوكول الحماية:<br>• حدث نظامك<br>• فعل تحقق بخطوتين<br>• لا تفتح روابط مجهولة<br>• كلمة مرور 16 حرف';} else if(l.includes('فيروس')){r+='تحليل برمجية خبيثة:<br>اعزل الجهاز<br>احذف الملف<br>فحص كامل.';} else {r+='كخبير أمن سيبراني أنصحك:<br>• تشفير الاتصالات<br>• مراقبة الشبكة<br>• نسخ احتياطي مشفر<br>اسألني عن تهديد محدد.';} r+='<br><br>🇾🇪 الحماية مسؤوليتنا.'; return r;}
+function send(){let inp=document.getElementById('msgInput'); let txt=inp.value.trim(); if(!txt) return; if(!navigator.onLine){alert('لا يوجد إنترنت');return;} let msg={name:myName,text:txt,time:new Date().toLocaleTimeString('ar-EG',{hour:'2-digit',minute:'2-digit'}),ts:Date.now()}; let key=getKey(); let arr=JSON.parse(localStorage.getItem(key)||'[]'); arr.push(msg); localStorage.setItem(key,JSON.stringify(arr)); inp.value=''; loadMsgs(); if(type==='ai'){setTimeout(()=>{let ai={name:'AI',text:cyberReply(txt),time:new Date().toLocaleTimeString('ar-EG',{hour:'2-digit',minute:'2-digit'})}; let a2=JSON.parse(localStorage.getItem(key)||'[]'); a2.push(ai); localStorage.setItem(key,JSON.stringify(a2)); loadMsgs();},1000);} }
+function attach(){let url=prompt('رابط الصورة/الملف:'); if(url===null) return; let msg={name:myName,text:'📎 ملف',file:url||'https://via.placeholder.com/300',fileName:'ملف_'+Date.now(),time:new Date().toLocaleTimeString('ar-EG',{hour:'2-digit',minute:'2-digit'})}; let key=getKey(); let arr=JSON.parse(localStorage.getItem(key)||'[]'); arr.push(msg); localStorage.setItem(key,JSON.stringify(arr)); loadMsgs();}
+function voice(){let msg={name:myName,text:'🎤 رسالة صوتية (محاكاة)',time:new Date().toLocaleTimeString('ar-EG',{hour:'2-digit',minute:'2-digit'})}; let key=getKey(); let arr=JSON.parse(localStorage.getItem(key)||'[]'); arr.push(msg); localStorage.setItem(key,JSON.stringify(arr)); loadMsgs();}
+loadMsgs(); setInterval(loadMsgs,3000);
 </script>
 </body>
 </html>
