@@ -1,69 +1,23 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>لوحة تحكم الأكواد - GHOST</title>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700;900&display=swap" rel="stylesheet">
+<html lang="ar" dir="rtl"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>لوحة المطور السرية</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Cairo',sans-serif}
-body{background:#0a001a;min-height:100vh;display:flex;justify-content:center;padding-top:30px;color:#fff}
-.box{width:100%;max-width:480px;background:#111;border:2px solid #ff2a7a;border-radius:18px;padding:22px;box-shadow:0 0 25px rgba(255,42,122,0.4)}
-h2{text-align:center;color:#ff8dc4;text-shadow:0 0 12px #ff2a7a;margin-bottom:15px}
-input{width:100%;height:48px;background:#000;border:1.5px solid #a855f7;border-radius:12px;color:#fff;text-align:center;font-size:16px;font-weight:700;margin-top:10px;outline:none}
-button{width:100%;height:48px;border:none;border-radius:12px;margin-top:12px;font-size:16px;font-weight:900;cursor:pointer}
-.btn-gen{background:linear-gradient(90deg,#ff2a7a,#7c3aed);color:#fff;box-shadow:0 0 15px rgba(255,42,122,0.5)}
-.btn-clear{background:#222;border:1px solid #ff2a7a;color:#ff8dc4}
-.code-item{background:#000;border:1px solid #333;padding:12px;border-radius:10px;margin-top:8px;display:flex;justify-content:space-between;align-items:center}
-.code-item b{color:#00ffff;font-size:16px;letter-spacing:1px}
-.del{background:#ff0040;width:65px;height:32px;font-size:12px;border-radius:8px}
-.foot{font-size:11px;color:#888;text-align:center;margin-top:20px;line-height:18px}
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@700&display=swap');
+*{font-family:'Cairo',sans-serif;box-sizing:border-box}body{background:#000;color:#fff;padding:18px;min-height:100vh}
+.bg{position:fixed;inset:0;background:url('bg1.jpg') center/cover;filter:brightness(0.3);z-index:-1}
+h1{text-align:center;color:#c084fc} .card{background:rgba(255,255,255,0.06);border:1px solid rgba(168,85,247,0.3);border-radius:16px;padding:14px;margin:14px 0;backdrop-filter:blur(12px)}
+button{width:100%;padding:12px;border:none;border-radius:12px;background:linear-gradient(135deg,#8b5cf6,#ec4899);color:#fff;font-weight:900;cursor:pointer;margin-top:8px}
+.code{background:rgba(0,0,0,0.6);padding:8px;border-radius:8px;margin:6px 0;border:1px dashed #a855f7;display:flex;justify-content:space-between;font-family:monospace}
 </style>
-</head>
-<body>
-<div class="box">
-<h2>👻 لوحة توليد أكواد GHOSTCOM</h2>
-
-<input id="prefix" value="GHOST-" placeholder="بادئة الكود">
-<input id="count" type="number" value="5" placeholder="كم كود تبي">
-
-<button class="btn-gen" onclick="gen()">⚡ ولد أكواد جديدة</button>
-<button class="btn-clear" onclick="clearAll()">🗑️ مسح كل الأكواد</button>
-
-<div id="list" style="margin-top:20px"></div>
-
-<p class="foot">هذا الرابط سري خاص فيك فقط<br>
-hnyfhaljmay55.github.io/ghostcom/admin.html<br>
-لا ترسله لأحد - انت فقط تفتحه وتولد أكواد</p>
-</div>
-
+</head><body>
+<div class="bg"></div>
+<h1>꧁ لوحة تحكم المطور السرية ꧂</h1>
+<p style="text-align:center;color:#9ca3af;font-size:11px">ADMIN ONLY • X7Y9-Z3K8-M2P4-Q5R1</p>
+<div class="card"><h3>🔑 توليد كود جديد</h3><button onclick="gen()">+ توليد كود عالمي</button><div id="new"></div></div>
+<div class="card"><h3>📋 الأكواد النشطة</h3><div id="active"></div></div>
+<div class="card"><h3>🔥 الأكواد المحروقة</h3><div id="used"></div><button onclick="localStorage.removeItem('ghost_used_codes');load();" style="background:#1f2937">حذف المحروقة</button></div>
 <script>
-let codes = JSON.parse(localStorage.getItem('ghost_admin_codes') || '[]');
-
-function gen(){
-  const pre = document.getElementById('prefix').value || 'GHOST-';
-  const n = parseInt(document.getElementById('count').value) || 5;
-  for(let i=0;i<n;i++){
-    let c = pre + Math.floor(1000+Math.random()*9000);
-    if(!codes.includes(c)) codes.push(c);
-  }
-  save();
-}
-function save(){
-  localStorage.setItem('ghost_admin_codes', JSON.stringify(codes));
-  localStorage.setItem('ghost_sub_codes_global', JSON.stringify(codes));
-  render();
-}
-function render(){
-  let html = `<div style="color:#ff8dc4;font-weight:700">عدد الأكواد: ${codes.length}</div>`;
-  codes.forEach((c,i)=>{
-    html+=`<div class="code-item"><b>${c}</b><button class="del" onclick="del(${i})">حذف</button></div>`;
-  });
-  document.getElementById('list').innerHTML = html;
-}
-function del(i){codes.splice(i,1);save();}
-function clearAll(){if(confirm('متأكد تبي تمسح كل الأكواد؟')){codes=[];save();}}
-render();
+function load(){let valid=JSON.parse(localStorage.getItem('ghost_valid_codes')||'[]'); let used=JSON.parse(localStorage.getItem('ghost_used_codes')||'{}'); document.getElementById('active').innerHTML=valid.filter(c=>!used[c]).map(c=>'<div class=code><span>'+c+'</span><button style=width:auto;padding:2px 8px;font-size:11px onclick=navigator.clipboard.writeText("'+c+'")>نسخ</button></div>').join('')||'لا يوجد'; document.getElementById('used').innerHTML=Object.keys(used).map(c=>'<div class=code>'+c+' 🔥 '+used[c]+'</div>').join('')||'لا يوجد';}
+function gen(){let code='GHOST-'+Math.random().toString(36).substr(2,4).toUpperCase()+'-'+Math.random().toString(36).substr(2,4).toUpperCase()+'-'+Date.now().toString(36).toUpperCase().slice(-3); let valid=JSON.parse(localStorage.getItem('ghost_valid_codes')||'[]'); valid.push(code); localStorage.setItem('ghost_valid_codes',JSON.stringify(valid)); document.getElementById('new').innerHTML='<div class=code style=color:#86efac>'+code+'</div>'; load();}
+load();
 </script>
-</body>
-</html>
+</body></html>
