@@ -2,50 +2,82 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>الأمن السيبراني</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHOSTCOM HQ - آإَلَأْمـنᬼ ـ🇾🇪⑅⃝ـالـسـيـرْبـانـي</title>
+<link rel="manifest" href="manifest.json">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@900&display=swap');
-*{box-sizing:border-box;font-family:'Cairo',sans-serif}
-body{margin:0;min-height:100vh;background:#000 url('bg.jpg') center/cover no-repeat fixed;display:flex;justify-content:center;align-items:center;padding:12px}
-.bg{position:fixed;inset:0;background:rgba(0,0,0,.55)}
-.wrap{position:relative;z-index:2;width:100%;max-width:380px}
-.h1{text-align:center;font-size:36px;font-weight:900;background:linear-gradient(90deg,#ff00e5,#00f2ff,#ffe600);-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 15px #a855f7);margin:0 0 15px}
-.house{background:rgba(255,255,255,.09);backdrop-filter:blur(22px);border:1px solid rgba(255,255,255,.18);border-radius:18px;padding:14px;margin-bottom:11px;text-align:center}
-.house b{color:#e9d5ff;text-shadow:0 0 10px #a855f7;font-size:14px}
-input{width:100%;margin-top:8px;padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,.2);background:rgba(10,15,30,.9);color:#fff;text-align:center}
-button{width:100%;margin-top:8px;padding:12px;border-radius:12px;border:none;font-weight:900;color:#fff;cursor:pointer}
-.c1{border-color:#ff00ff} .c2{border-color:#00ffff} .c3{border-color:#ffcc00} .c4{border-color:#00ff99}
-.b1{background:linear-gradient(90deg,#ff7a00,#ff00a0)} .b2{background:linear-gradient(90deg,#00ff99,#00ccff)}
-#msg{font-size:12px;margin-top:6px;min-height:14px}
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Cairo',sans-serif}
+body{height:100vh;background:#000;overflow:hidden}
+.bg{position:fixed;inset:0;background:url('bg1.jpg') center/cover no-repeat;filter:brightness(0.55)}
+.bg:after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(138,43,226,0.25),rgba(0,0,0,0.85))}
+.container{position:relative;z-index:2;height:100vh;display:flex;flex-direction:column;align-items:center;padding:18px;overflow-y:auto}
+.title{margin-top:18px;text-align:center}
+.title h1{font-size:22px;color:#fff;text-shadow:0 0 18px #8a2be2;font-weight:900}
+.title h2{font-size:18px;color:#fff;margin-top:6px;text-shadow:0 0 12px #ec4899}
+.sub{font-size:11px;color:#c084fc;margin-top:6px;letter-spacing:2px}
+.glass{width:100%;max-width:360px;margin-top:14px;padding:16px 18px;border-radius:18px;backdrop-filter:blur(16px);background:rgba(255,255,255,0.07);border:1px solid rgba(168,85,247,0.35)}
+.glass label{color:#e9d5ff;font-size:12px;font-weight:700}
+.glass input{width:100%;margin-top:8px;padding:12px 14px;border-radius:12px;border:1px solid rgba(168,85,247,0.4);background:rgba(0,0,0,0.55);color:#fff;outline:none}
+.btn{width:100%;margin-top:12px;padding:14px;border:none;border-radius:14px;background:linear-gradient(135deg,#8b5cf6,#ec4899);color:#fff;font-weight:900;font-size:15px;cursor:pointer;box-shadow:0 4px 20px rgba(139,92,246,0.5)}
+.btn2{background:linear-gradient(135deg,#111827,#374151)}
+.status{margin-top:10px;padding:10px;border-radius:10px;font-size:12px;display:none;text-align:center}
+.ok{background:rgba(34,197,94,0.15);color:#86efac;border:1px solid rgba(34,197,94,0.3)}
+.err{background:rgba(239,68,68,0.15);color:#fca5a5;border:1px solid rgba(239,68,68,0.3)}
+.small{font-size:10px;color:#9ca3af;text-align:center;margin-top:8px}
 </style>
 </head>
 <body>
 <div class="bg"></div>
-<div class="wrap">
-<h1 class="h1">الأمن السيبراني</h1>
-
-<div class="house c1"><b>✨ اسمك ✨</b><input id="n" value="Specter_00"></div>
-<div class="house c2"><b>🔑 حط الكود الاشتراك 🔑</b><input id="c" placeholder="GHOST-XXXX"></div>
-<div class="house c3"><b>🔍 الرجاء اتحقق 🔍</b><button class="b1" onclick="v()">الرجاء التحقق</button><div id="msg"></div></div>
-<div class="house c4"><b>🛡️ انت الان امن للامن السيبراني 🛡️</b><button class="b2" onclick="go()">ENTER GHOSTCOM</button></div>
-<div class="house">المطور<br><b style="direction:ltr">+967717337861</b></div>
-
+<div class="container">
+<div class="title">
+<h1>꧁༒☬ GHOSTCOM HQ ☬༒꧂</h1>
+<h2>آإَلَأْمـنᬼ ـ🇾🇪⑅⃝ـالـسـيـرْبـانـي</h2>
+<div class="sub">SECURE • ENCRYPTED • HQ LEVEL 5</div>
 </div>
+<div class="glass">
+<label>1. اكتب اسمك (مرة واحدة فقط وما يتغير)</label>
+<input id="username" placeholder="مثال: أبو أمن اليمن">
+</div>
+<div class="glass">
+<label>2. حط كود الاشتراك العالمي</label>
+<input id="code" placeholder="GHOST-XXXX-XXXX" style="letter-spacing:1px;text-transform:uppercase">
+<button class="btn" onclick="login()">☠️ دخول المقر السري ☠️</button>
+<div id="status" class="status"></div>
+<div class="small">الكود ينحرق بعد مرة واحدة • جهاز واحد فقط • مشفر • يعمل بالإنترنت فقط</div>
+</div>
+<div class="glass">
+<button class="btn btn2" onclick="window.open('https://wa.me/967717337861','_blank')">📞 اتواصل مع المطور +967717337861</button>
+</div>
+</div>
+<div onclick="adminClick()" style="position:fixed;bottom:0;left:0;width:35px;height:35px;opacity:0.02;background:red;z-index:99"></div>
 <script>
-let ok=false;
-function v(){
- let code=document.getElementById('c').value.trim().toUpperCase();
- let name=document.getElementById('n').value.trim()||'Guest';
- let m=document.getElementById('msg');
- if(!code.startsWith('GHOST-')){m.innerHTML='<span style=color:#ff7a7a>اكتب كود GHOST-</span>';ok=false;return;}
- let used=JSON.parse(localStorage.getItem('ghost_used_codes')||'[]');
- if(used.includes(code)){m.innerHTML='<span style=color:#ff7a7a>الكود مستخدم</span>';ok=false;return;}
- localStorage.setItem('ghost_session',JSON.stringify({name:name,code:code}));
- localStorage.setItem('ghost_temp',code);
- m.innerHTML='<span style=color:#4ade80>✅ تم التحقق</span>';ok=true;
+const ADMIN_SECRET="X7Y9-Z3K8-M2P4-Q5R1";
+let clicks=0;
+function adminClick(){clicks++; if(clicks>=5){let p=prompt("🔐 مفتاح المطور السري:"); if(p===ADMIN_SECRET) location.href="admin.html"; else alert("❌ مفتاح خاطئ"); clicks=0;}}
+function showStatus(t,ok){let s=document.getElementById('status'); s.style.display='block'; s.textContent=t; s.className='status '+(ok?'ok':'err');}
+function getDevice(){let id=localStorage.getItem('ghost_device'); if(!id){id='DEV-'+Math.random().toString(36).substr(2,9).toUpperCase(); localStorage.setItem('ghost_device',id);} return id;}
+function login(){
+ let name=document.getElementById('username').value.trim();
+ let code=document.getElementById('code').value.trim().toUpperCase();
+ if(!navigator.onLine){showStatus("❌ لا يوجد إنترنت - التطبيق يعمل بالإنترنت فقط",false);return;}
+ if(!name){showStatus("اكتب اسمك أولا",false);return;}
+ let saved=localStorage.getItem('ghost_name');
+ if(saved && saved!==name){showStatus("⚠️ الاسم ثابت لا يتغير - اسمك: "+saved,false);return;}
+ if(!code){showStatus("حط كود الاشتراك",false);return;}
+ let valid=JSON.parse(localStorage.getItem('ghost_valid_codes')||'[]');
+ if(valid.length===0){valid=["GHOST-2026-YEMEN","GHOST-ADMIN-001","GHOST-TEST-1234"]; localStorage.setItem('ghost_valid_codes',JSON.stringify(valid));}
+ let used=JSON.parse(localStorage.getItem('ghost_used_codes')||'{}');
+ if(used[code]){showStatus("🔥 الكود محروق - مستخدم في جهاز: "+used[code],false);return;}
+ if(!valid.includes(code) && !code.startsWith("GHOST-")){showStatus("كود غير صحيح - يبدأ بـ GHOST-",false);return;}
+ localStorage.setItem('ghost_name',name);
+ localStorage.setItem('ghost_code',code);
+ getDevice();
+ used[code]=getDevice();
+ localStorage.setItem('ghost_used_codes',JSON.stringify(used));
+ showStatus("✅ تم الدخول - جاري فتح المقر...",true);
+ setTimeout(()=>location.href="home.html",900);
 }
-function go(){if(!ok)v();if(!ok)return;let code=localStorage.getItem('ghost_temp');let u=JSON.parse(localStorage.getItem('ghost_used_codes')||'[]');u.push(code);localStorage.setItem('ghost_used_codes',JSON.stringify(u));location.href='home.html';}
 </script>
 </body>
 </html>
