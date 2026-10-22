@@ -3,81 +3,196 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GHOSTCOM HQ - آإَلَأْمـنᬼ ـ🇾🇪⑅⃝ـالـسـيـرْبـانـي</title>
-<link rel="manifest" href="manifest.json">
+<title>GHOSTCOM HQ - السفاح</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700;900&display=swap" rel="stylesheet">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap');
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Cairo',sans-serif}
-body{height:100vh;background:#000;overflow:hidden}
-.bg{position:fixed;inset:0;background:url('bg1.jpg') center/cover no-repeat;filter:brightness(0.55)}
-.bg:after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(138,43,226,0.25),rgba(0,0,0,0.85))}
-.container{position:relative;z-index:2;height:100vh;display:flex;flex-direction:column;align-items:center;padding:18px;overflow-y:auto}
-.title{margin-top:18px;text-align:center}
-.title h1{font-size:22px;color:#fff;text-shadow:0 0 18px #8a2be2;font-weight:900}
-.title h2{font-size:18px;color:#fff;margin-top:6px;text-shadow:0 0 12px #ec4899}
-.sub{font-size:11px;color:#c084fc;margin-top:6px;letter-spacing:2px}
-.glass{width:100%;max-width:360px;margin-top:14px;padding:16px 18px;border-radius:18px;backdrop-filter:blur(16px);background:rgba(255,255,255,0.07);border:1px solid rgba(168,85,247,0.35)}
-.glass label{color:#e9d5ff;font-size:12px;font-weight:700}
-.glass input{width:100%;margin-top:8px;padding:12px 14px;border-radius:12px;border:1px solid rgba(168,85,247,0.4);background:rgba(0,0,0,0.55);color:#fff;outline:none}
-.btn{width:100%;margin-top:12px;padding:14px;border:none;border-radius:14px;background:linear-gradient(135deg,#8b5cf6,#ec4899);color:#fff;font-weight:900;font-size:15px;cursor:pointer;box-shadow:0 4px 20px rgba(139,92,246,0.5)}
-.btn2{background:linear-gradient(135deg,#111827,#374151)}
-.status{margin-top:10px;padding:10px;border-radius:10px;font-size:12px;display:none;text-align:center}
-.ok{background:rgba(34,197,94,0.15);color:#86efac;border:1px solid rgba(34,197,94,0.3)}
-.err{background:rgba(239,68,68,0.15);color:#fca5a5;border:1px solid rgba(239,68,68,0.3)}
-.small{font-size:10px;color:#9ca3af;text-align:center;margin-top:8px}
+body{background:#050508;color:#fff;min-height:100vh}
+.bg{position:fixed;inset:0;background:radial-gradient(ellipse at top,#1a0b2e 0%,#0a0a14 70%,#050508 100%);z-index:-1}
+.neon{border:1px solid #a855ff;box-shadow:0 0 18px rgba(168,85,255,.35);background:linear-gradient(135deg,rgba(25,15,45,.9),rgba(15,10,30,.95));backdrop-filter:blur(14px);border-radius:16px}
+.card{padding:16px;margin:10px;border-radius:16px;cursor:pointer}
+.screen{display:none;height:100vh;overflow-y:auto;padding-bottom:90px}
+.screen.active{display:block}
+.input{width:100%;padding:16px;background:rgba(15,10,30,.9);border:1px solid #a855ff;border-radius:14px;color:#fff;outline:none;margin:7px 0}
+.btn{background:linear-gradient(90deg,#a855ff,#7c3aed);border:none;padding:15px;border-radius:14px;color:#fff;font-weight:900;width:100%;cursor:pointer;box-shadow:0 0 22px rgba(168,85,255,.5);margin-top:10px}
+.bottom{position:fixed;bottom:12px;left:12px;right:12px;background:rgba(15,10,30,.97);border:1px solid #a855ff;border-radius:22px;display:flex;justify-content:space-around;padding:8px;z-index:99}
+.b-item{padding:10px 12px;border-radius:14px;color:#666;text-align:center;flex:1;font-size:12px;cursor:pointer}
+.b-item.active{background:linear-gradient(90deg,#a855ff,#7c3aed);color:#fff}
+.msg{max-width:82%;padding:11px 15px;border-radius:18px;margin:6px 10px;font-size:14px;word-break:break-word}
+.msg.me{background:linear-gradient(90deg,#a855ff,#7c3aed);align-self:flex-end;margin-left:auto;border-bottom-right-radius:4px}
+.msg.other{background:rgba(30,18,55,.95);border:1px solid #2a1a45;align-self:flex-start;border-bottom-left-radius:4px}
+.msg img,.msg video{max-width:100%;border-radius:12px;margin-top:8px}
+.msg audio{width:220px;margin-top:6px}
+.chatArea{display:flex;flex-direction:column;height:calc(100vh - 210px);overflow-y:auto;padding:10px}
+.bar{position:fixed;bottom:78px;left:10px;right:10px;display:flex;gap:7px;align-items:center;background:rgba(15,10,30,.98);padding:8px 10px;border-radius:28px;border:1px solid #333;z-index:98}
+.bar input{flex:1;background:transparent;border:none;color:#fff;outline:none;font-size:15px;padding:8px}
+.iconBtn{width:42px;height:42px;border-radius:50%;background:rgba(168,85,255,.18);border:1px solid #a855ff;color:#a855ff;display:flex;align-items:center;justify-content:center;font-size:20px;cursor:pointer;flex-shrink:0}
+.iconBtn.send{background:linear-gradient(90deg,#a855ff,#7c3aed);color:#fff;border:none}
 </style>
 </head>
 <body>
 <div class="bg"></div>
-<div class="container">
-<div class="title">
-<h1>꧁༒☬ GHOSTCOM HQ ☬༒꧂</h1>
-<h2>آإَلَأْمـنᬼ ـ🇾🇪⑅⃝ـالـسـيـرْبـانـي</h2>
-<div class="sub">SECURE • ENCRYPTED • HQ LEVEL 5</div>
+
+<!-- LOGIN -->
+<div id="sc-login" class="screen active">
+<div style="padding:20px">
+<div class="neon" style="padding:14px;text-align:center">
+<div style="color:#e9d5ff;font-weight:900;font-size:20px">GHOSTCOM HQ</div>
+<div style="color:#d8b4fe">آلأمن _ السيبراني 👾</div>
+<div style="font-size:10px;color:#7dd3fc">SECURE • ENCRYPTED • ADMIN LEVEL 5</div>
 </div>
-<div class="glass">
-<label>1. اكتب اسمك (مرة واحدة فقط وما يتغير)</label>
-<input id="username" placeholder="مثال: أبو أمن اليمن">
-</div>
-<div class="glass">
-<label>2. حط كود الاشتراك العالمي</label>
-<input id="code" placeholder="GHOST-XXXX-XXXX" style="letter-spacing:1px;text-transform:uppercase">
-<button class="btn" onclick="login()">☠️ دخول المقر السري ☠️</button>
-<div id="status" class="status"></div>
-<div class="small">الكود ينحرق بعد مرة واحدة • جهاز واحد فقط • مشفر • يعمل بالإنترنت فقط</div>
-</div>
-<div class="glass">
-<button class="btn btn2" onclick="window.open('https://wa.me/967717337861','_blank')">📞 اتواصل مع المطور +967717337861</button>
+<div style="margin-top:25px">
+<div class="neon card" style="display:flex;align-items:center;gap:12px">👤<input id="inpName" class="input" style="border:none;background:transparent;margin:0" placeholder="اكتب اسمك"></div>
+<div class="neon card" style="display:flex;align-items:center;gap:12px">🔑<input id="inpCode" class="input" style="border:none;background:transparent;margin:0" placeholder="حط كود الاشتراك"></div>
+<div class="neon card" onclick="goGlobal()" style="display:flex;gap:12px">💬<div style="flex:1">دردشة عالمية</div>›</div>
+<div class="neon card" onclick="window.open('https://wa.me/9677117337861')">📞 تواصل +9677117337861</div>
+<button class="btn" onclick="login()">دخول آمن 🔒</button>
+<div style="text-align:center;margin-top:12px;color:#555;font-size:11px">ادمن: <b style="color:#a855ff">ADMIN123</b> • صديق: <b style="color:#a855ff">SAFFAH</b></div>
 </div>
 </div>
-<div onclick="adminClick()" style="position:fixed;bottom:0;left:0;width:35px;height:35px;opacity:0.02;background:red;z-index:99"></div>
+</div>
+
+<!-- ADMIN -->
+<div id="sc-admin" class="screen">
+<div class="neon" style="margin:12px;padding:12px;text-align:center">
+<div style="font-weight:900;font-size:18px;color:#e9d5ff">لوحة تحكم المطور السرية</div>
+<div style="font-size:10px;color:#7dd3fc">SECURE • ENCRYPTED • ADMIN ACCESS LEVEL 5</div>
+<div style="margin-top:8px;background:rgba(0,0,0,.4);padding:6px 12px;border-radius:20px;display:inline-block;font-size:11px">🔒 الاتصال مشفر • <span style="color:#4ade80">● ONLINE</span></div>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 8px">
+<div class="neon card" style="text-align:center" onclick="genCode()"><div style="font-size:28px">➕</div><div style="font-size:12px;margin-top:6px">توليد كود جديد</div></div>
+<div class="neon card" style="text-align:center"><div style="font-size:28px;color:#4ade80">✓</div><div style="font-size:12px">الأكواد النشطة<br><span id="cntActive">0</span></div></div>
+<div class="neon card" style="text-align:center" onclick="clearAll()"><div style="font-size:28px">🗑️</div><div style="font-size:12px">حذف الأكواد</div></div>
+<div class="neon card" style="text-align:center"><div style="font-size:28px">👥</div><div style="font-size:12px">عدد المستخدمين<br><span id="cntUsers">247</span></div></div>
+</div>
+<div style="padding:10px">
+<div id="codesList"></div>
+<div style="display:flex;gap:6px;margin-top:10px"><input id="inpNewCode" class="input" placeholder="كود مثل FRIEND1"><button class="btn" style="width:80px;margin:0" onclick="addCode()">+</button></div>
+<button class="btn" style="background:rgba(255,255,255,.06);border:1px solid #a855ff" onclick="copyInvite()">📤 نسخ دعوة للاصدقاء</button>
+</div>
+</div>
+
+<!-- SECURITY -->
+<div id="sc-sec" class="screen">
+<div style="padding:20px"><h1 style="font-size:28px;font-weight:900">مركز الحماية</h1><p style="color:#a855ff">Cyber Security • آمن الآن</p></div>
+<div class="neon card" onclick="openChat('الجروب')" style="display:flex;gap:14px">🏴‍☠️<div style="flex:1"><b>الجروب ›</b><br><small style="color:#aaa">الدردشة الجماعية • 128 عضو</small></div></div>
+<div class="neon card" onclick="openChat('الخاص')" style="display:flex;gap:14px">🕶️<div style="flex:1"><b>الخاص ›</b><br><small style="color:#aaa">محادثة آمنة مشفرة</small></div></div>
+<div style="padding:10px"><button class="btn" onclick="openChat('الجروب')">🚀 دخول الدردشة العالمية</button></div>
+</div>
+
+<!-- CHAT -->
+<div id="sc-chat" class="screen">
+<div class="neon" style="margin:0;border-radius:0;padding:10px 14px;display:flex;justify-content:space-between;align-items:center">
+<div style="display:flex;align-items:center;gap:10px"><span onclick="showScr('sec')" style="font-size:22px;cursor:pointer">‹</span><div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#a855ff,#ff00ff)"></div><div><div style="font-weight:700;font-size:14px" id="chatTitle">الجروب</div><div style="font-size:11px;color:#4ade80">online • Encrypted</div></div></div>📹 📞 ⋯
+</div>
+<div id="chatBox" class="chatArea"></div>
+<div class="bar">
+<label class="iconBtn" for="fileInp">+</label><input type="file" id="fileInp" hidden accept="image/*,video/*,.pdf,.zip,.mp3" onchange="sendFile(this)">
+<label class="iconBtn" for="imgInp">📷</label><input type="file" id="imgInp" hidden accept="image/*,video/*" onchange="sendFile(this)">
+<input id="txtInp" placeholder="اكتب رسالة..." onkeydown="if(event.key==='Enter')sendText()">
+<div id="recBtn" class="iconBtn" onclick="toggleRec()">🎤</div><button class="iconBtn send" onclick="sendText()">➤</button>
+</div>
+<div id="recBar" style="display:none;position:fixed;bottom:78px;left:10px;right:10px;background:#1a0b2e;border:1px solid #ff3333;border-radius:28px;padding:10px 16px;justify-content:space-between;align-items:center;z-index:99"><div style="display:flex;align-items:center;gap:8px"><div style="width:12px;height:12px;background:#f33;border-radius:50%"></div><span id="recTime">00:00</span> • تسجيل...</div><div style="display:flex;gap:8px"><button class="iconBtn" style="background:#222;border:none;color:#fff" onclick="cancelRec()">✕</button><button class="iconBtn send" onclick="stopRec()">✓</button></div></div>
+</div>
+
+<div class="bottom" id="nav" style="display:none">
+<div class="b-item" onclick="showScr('sec')">🏠<br>الرئيسية</div>
+<div class="b-item" onclick="showScr('admin')">🔒<br>التحكم</div>
+<div class="b-item active" onclick="showScr('chat')">💬<br>الشات</div>
+<div class="b-item" onclick="showScr('login')">👤<br>حسابي</div>
+</div>
+
 <script>
-const ADMIN_SECRET="X7Y9-Z3K8-M2P4-Q5R1";
-let clicks=0;
-function adminClick(){clicks++; if(clicks>=5){let p=prompt("🔐 مفتاح المطور السري:"); if(p===ADMIN_SECRET) location.href="admin.html"; else alert("❌ مفتاح خاطئ"); clicks=0;}}
-function showStatus(t,ok){let s=document.getElementById('status'); s.style.display='block'; s.textContent=t; s.className='status '+(ok?'ok':'err');}
-function getDevice(){let id=localStorage.getItem('ghost_device'); if(!id){id='DEV-'+Math.random().toString(36).substr(2,9).toUpperCase(); localStorage.setItem('ghost_device',id);} return id;}
+let codes = JSON.parse(localStorage.getItem('ghost_codes_v3')||'["SAFFAH","TEST122","GHOST"]');
+let myName = localStorage.getItem('ghost_name')||'السفاح';
+let ADMIN="ADMIN123";
+let mediaRecorder, audioChunks=[], recTimer, recSec=0;
+let chatInited=false;
+
 function login(){
- let name=document.getElementById('username').value.trim();
- let code=document.getElementById('code').value.trim().toUpperCase();
- if(!navigator.onLine){showStatus("❌ لا يوجد إنترنت - التطبيق يعمل بالإنترنت فقط",false);return;}
- if(!name){showStatus("اكتب اسمك أولا",false);return;}
- let saved=localStorage.getItem('ghost_name');
- if(saved && saved!==name){showStatus("⚠️ الاسم ثابت لا يتغير - اسمك: "+saved,false);return;}
- if(!code){showStatus("حط كود الاشتراك",false);return;}
- let valid=JSON.parse(localStorage.getItem('ghost_valid_codes')||'[]');
- if(valid.length===0){valid=["GHOST-2026-YEMEN","GHOST-ADMIN-001","GHOST-TEST-1234"]; localStorage.setItem('ghost_valid_codes',JSON.stringify(valid));}
- let used=JSON.parse(localStorage.getItem('ghost_used_codes')||'{}');
- if(used[code]){showStatus("🔥 الكود محروق - مستخدم في جهاز: "+used[code],false);return;}
- if(!valid.includes(code) && !code.startsWith("GHOST-")){showStatus("كود غير صحيح - يبدأ بـ GHOST-",false);return;}
- localStorage.setItem('ghost_name',name);
- localStorage.setItem('ghost_code',code);
- getDevice();
- used[code]=getDevice();
- localStorage.setItem('ghost_used_codes',JSON.stringify(used));
- showStatus("✅ تم الدخول - جاري فتح المقر...",true);
- setTimeout(()=>location.href="home.html",900);
+ let n=document.getElementById('inpName').value.trim()||'السفاح';
+ let c=document.getElementById('inpCode').value.trim().toUpperCase();
+ if(!c){alert('حط الكود!');return}
+ myName=n; localStorage.setItem('ghost_name',n);
+ if(c===ADMIN){showScr('admin'); renderCodes(); return;}
+ if(!codes.includes(c)){alert('كود غلط! جرب: '+codes.join(', ')+' أو ADMIN123');return;}
+ showScr('sec');
 }
+function showScr(s){
+ document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));
+ document.querySelectorAll('.b-item').forEach(x=>x.classList.remove('active'));
+ if(s==='login'){document.getElementById('sc-login').classList.add('active');document.getElementById('nav').style.display='none';}
+ if(s==='admin'){document.getElementById('sc-admin').classList.add('active');document.querySelectorAll('.b-item')[1].classList.add('active');renderCodes();document.getElementById('nav').style.display='flex';}
+ if(s==='sec'){document.getElementById('sc-sec').classList.add('active');document.querySelectorAll('.b-item')[0].classList.add('active');document.getElementById('nav').style.display='flex';}
+ if(s==='chat'){document.getElementById('sc-chat').classList.add('active');document.querySelectorAll('.b-item')[2].classList.add('active');document.getElementById('nav').style.display='flex';}
+}
+function goGlobal(){document.getElementById('inpName').value=myName; document.getElementById('inpCode').value=codes[0]||'SAFFAH'; login(); setTimeout(()=>openChat('الجروب'),400);}
+function openChat(t){document.getElementById('chatTitle').innerText=t+' - CyberSec Ops'; showScr('chat'); initChat();}
+
+function renderCodes(){
+ let list=document.getElementById('codesList'); list.innerHTML='';
+ codes.forEach((c,i)=>{
+   list.innerHTML+=`<div class="neon" style="display:flex;justify-content:space-between;align-items:center;padding:10px;margin:6px 0"><b style="color:#e9d5ff">${c}</b><span><button onclick="copyT('${c}')" style="background:#222;color:#fff;border:none;padding:6px 10px;border-radius:8px;margin-left:4px">نسخ</button><button onclick="delC(${i})" style="background:#ff3333;color:#fff;border:none;padding:6px 10px;border-radius:8px">حذف</button></span></div>`;
+ });
+ document.getElementById('cntActive').innerText=codes.length;
+}
+function genCode(){let c='SAFFAH'+Math.floor(Math.random()*9000+1000); codes.push(c); localStorage.setItem('ghost_codes_v3',JSON.stringify(codes)); renderCodes(); alert('✅ كود جديد:\n'+c);}
+function addCode(){let v=document.getElementById('inpNewCode').value.trim().toUpperCase(); if(!v)return; if(codes.includes(v))return alert('موجود'); codes.push(v); localStorage.setItem('ghost_codes_v3',JSON.stringify(codes)); document.getElementById('inpNewCode').value=''; renderCodes();}
+function delC(i){codes.splice(i,1); localStorage.setItem('ghost_codes_v3',JSON.stringify(codes)); renderCodes();}
+function copyT(t){navigator.clipboard.writeText(t); alert('تم النسخ: '+t);}
+function clearAll(){if(confirm('تحذف كل الاكواد؟')){codes=['SAFFAH']; localStorage.setItem('ghost_codes_v3',JSON.stringify(codes)); renderCodes();}}
+function copyInvite(){let txt=`👑 GHOSTCOM HQ - السفاح\n\nرابطك:\nhttps://hnyfhaljmay55.github.io/ghostcom/\n\nاكواد الدخول:\n${codes.join(' , ')}\n\nكود الادمن (لك فقط): ADMIN123`; navigator.clipboard.writeText(txt); alert(txt);}
+
+function initChat(){
+ if(chatInited) return; chatInited=true;
+ let box=document.getElementById('chatBox');
+ box.innerHTML=`<div class="msg other"><div style="font-size:10px;opacity:.6">النظام</div>👋 مرحبا في GHOSTCOM HQ - مشفر وآمن 🔒</div>`;
+ let arr=JSON.parse(localStorage.getItem('ghost_msgs')||'[]'); arr.forEach(m=>addUI(m.name,m.text,m.type,m.data,m.name===myName));
+ window.addEventListener('storage',(e)=>{if(e.key==='ghost_msgs_new'){let m=JSON.parse(e.newValue); addUI(m.name,m.text,m.type,m.data,false);}});
+}
+function addUI(name,text,type,data,isMe){
+ let box=document.getElementById('chatBox');
+ let div=document.createElement('div'); div.className='msg '+(isMe?'me':'other');
+ let time=new Date().toLocaleTimeString('ar-SA',{hour:'2-digit',minute:'2-digit'});
+ let content=`<div style="font-size:10px;opacity:.6">${name} • ${time}</div>`;
+ if(type==='text') content+=`<div>${text}</div>`;
+ if(type==='image') content+=`<div>${text}</div><img src="${data}">`;
+ if(type==='video') content+=`<div>${text}</div><video src="${data}" controls></video>`;
+ if(type==='audio') content+=`<div>🎤 صوتية</div><audio src="${data}" controls></audio>`;
+ if(type==='file') content+=`<div>📎 ${text}</div><a href="${data}" download="${text}" style="color:#00e5ff">تحميل</a>`;
+ div.innerHTML=content; box.appendChild(div); box.scrollTop=box.scrollHeight;
+}
+function pushMsg(m){let arr=JSON.parse(localStorage.getItem('ghost_msgs')||'[]'); arr.push(m); localStorage.setItem('ghost_msgs',JSON.stringify(arr)); localStorage.setItem('ghost_msgs_new',JSON.stringify(m)); addUI(m.name,m.text,m.type,m.data,true);}
+
+function sendText(){let inp=document.getElementById('txtInp'); let txt=inp.value.trim(); if(!txt) return; pushMsg({name:myName,text:txt,type:'text',data:'',time:Date.now()}); inp.value='';}
+function sendFile(el){
+ let file=el.files[0]; if(!file) return;
+ if(file.size>6*1024*1024){alert('الملف كبير! أقل من 6 ميجا');return;}
+ let reader=new FileReader();
+ reader.onload=(e)=>{
+   let data=e.target.result;
+   let type=file.type.startsWith('image/')?'image':file.type.startsWith('video/')?'video':'file';
+   pushMsg({name:myName,text:file.name,type:type,data:data,time:Date.now()});
+ };
+ reader.readAsDataURL(file); el.value='';
+}
+function toggleRec(){if(mediaRecorder && mediaRecorder.state==='recording'){stopRec();return;} startRec();}
+async function startRec(){
+ try{
+   let stream=await navigator.mediaDevices.getUserMedia({audio:true});
+   mediaRecorder=new MediaRecorder(stream); audioChunks=[]; recSec=0;
+   mediaRecorder.ondataavailable=e=>audioChunks.push(e.data);
+   mediaRecorder.onstop=()=>{
+     let blob=new Blob(audioChunks,{type:'audio/webm'});
+     let reader=new FileReader(); reader.onload=(e)=>{pushMsg({name:myName,text:'رسالة صوتية',type:'audio',data:e.target.result,time:Date.now()});}; reader.readAsDataURL(blob);
+     stream.getTracks().forEach(t=>t.stop());
+   };
+   mediaRecorder.start(); document.getElementById('recBar').style.display='flex';
+   recTimer=setInterval(()=>{recSec++; let m=String(Math.floor(recSec/60)).padStart(2,'0'); let s=String(recSec%60).padStart(2,'0'); document.getElementById('recTime').innerText=m+':'+s;},1000);
+ }catch(e){alert('المايك: '+e.message);}
+}
+function stopRec(){if(mediaRecorder){mediaRecorder.stop(); clearInterval(recTimer); document.getElementById('recBar').style.display='none';}}
+function cancelRec(){if(mediaRecorder){try{mediaRecorder.stop();}catch{} mediaRecorder=null;} clearInterval(recTimer); document.getElementById('recBar').style.display='none';}
 </script>
 </body>
-</html>
+                                                                                                         </html>
